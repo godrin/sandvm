@@ -1,0 +1,10 @@
+#ifndef VM_DEFINES_H
+#define VM_DEFINES_H
+
+#define VM_THREAD_COUNT_PER_VM 10
+#define VM_MEMORY_SIZE 80000
+#define VM_QUEUE_COUNT 80
+#define VM_REGISTER_COUNT 80
+
+
+#endif

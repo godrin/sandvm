@@ -1,6 +1,6 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/vm.dir/vm_memory.cc.o"
   "CMakeFiles/vm.dir/vm.cc.o"
+  "CMakeFiles/vm.dir/vm_memory.cc.o"
   "CMakeFiles/vm.dir/vm_regs.cc.o"
   "CMakeFiles/vm.dir/vm_instruction.cc.o"
   "CMakeFiles/vm.dir/vm_sim.cc.o"
@@ -10,6 +10,9 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/vm.dir/vm_types.cc.o"
   "CMakeFiles/vm.dir/vm_vm.cc.o"
   "CMakeFiles/vm.dir/vm_queues.cc.o"
+  "CMakeFiles/vm.dir/vm_loader.cc.o"
+  "CMakeFiles/vm.dir/vm_stack.cc.o"
+  "CMakeFiles/vm.dir/vm_ops.cc.o"
   "vm.pdb"
   "vm"
 )

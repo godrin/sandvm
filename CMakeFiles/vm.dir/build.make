@@ -49,32 +49,9 @@ include CMakeFiles/vm.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/vm.dir/flags.make
 
-CMakeFiles/vm.dir/vm_memory.cc.o: CMakeFiles/vm.dir/flags.make
-CMakeFiles/vm.dir/vm_memory.cc.o: vm_memory.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm_memory.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm_memory.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm_memory.cc
-
-CMakeFiles/vm.dir/vm_memory.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vm.dir/vm_memory.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/davidkamphausen/projects2/vm/src/vm_memory.cc > CMakeFiles/vm.dir/vm_memory.cc.i
-
-CMakeFiles/vm.dir/vm_memory.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vm.dir/vm_memory.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/davidkamphausen/projects2/vm/src/vm_memory.cc -o CMakeFiles/vm.dir/vm_memory.cc.s
-
-CMakeFiles/vm.dir/vm_memory.cc.o.requires:
-.PHONY : CMakeFiles/vm.dir/vm_memory.cc.o.requires
-
-CMakeFiles/vm.dir/vm_memory.cc.o.provides: CMakeFiles/vm.dir/vm_memory.cc.o.requires
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_memory.cc.o.provides.build
-.PHONY : CMakeFiles/vm.dir/vm_memory.cc.o.provides
-
-CMakeFiles/vm.dir/vm_memory.cc.o.provides.build: CMakeFiles/vm.dir/vm_memory.cc.o
-
 CMakeFiles/vm.dir/vm.cc.o: CMakeFiles/vm.dir/flags.make
 CMakeFiles/vm.dir/vm.cc.o: vm.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm.cc
 
@@ -94,6 +71,29 @@ CMakeFiles/vm.dir/vm.cc.o.provides: CMakeFiles/vm.dir/vm.cc.o.requires
 .PHONY : CMakeFiles/vm.dir/vm.cc.o.provides
 
 CMakeFiles/vm.dir/vm.cc.o.provides.build: CMakeFiles/vm.dir/vm.cc.o
+
+CMakeFiles/vm.dir/vm_memory.cc.o: CMakeFiles/vm.dir/flags.make
+CMakeFiles/vm.dir/vm_memory.cc.o: vm_memory.cc
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm_memory.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm_memory.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm_memory.cc
+
+CMakeFiles/vm.dir/vm_memory.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vm.dir/vm_memory.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/davidkamphausen/projects2/vm/src/vm_memory.cc > CMakeFiles/vm.dir/vm_memory.cc.i
+
+CMakeFiles/vm.dir/vm_memory.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vm.dir/vm_memory.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/davidkamphausen/projects2/vm/src/vm_memory.cc -o CMakeFiles/vm.dir/vm_memory.cc.s
+
+CMakeFiles/vm.dir/vm_memory.cc.o.requires:
+.PHONY : CMakeFiles/vm.dir/vm_memory.cc.o.requires
+
+CMakeFiles/vm.dir/vm_memory.cc.o.provides: CMakeFiles/vm.dir/vm_memory.cc.o.requires
+	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_memory.cc.o.provides.build
+.PHONY : CMakeFiles/vm.dir/vm_memory.cc.o.provides
+
+CMakeFiles/vm.dir/vm_memory.cc.o.provides.build: CMakeFiles/vm.dir/vm_memory.cc.o
 
 CMakeFiles/vm.dir/vm_regs.cc.o: CMakeFiles/vm.dir/flags.make
 CMakeFiles/vm.dir/vm_regs.cc.o: vm_regs.cc
@@ -302,10 +302,79 @@ CMakeFiles/vm.dir/vm_queues.cc.o.provides: CMakeFiles/vm.dir/vm_queues.cc.o.requ
 
 CMakeFiles/vm.dir/vm_queues.cc.o.provides.build: CMakeFiles/vm.dir/vm_queues.cc.o
 
+CMakeFiles/vm.dir/vm_loader.cc.o: CMakeFiles/vm.dir/flags.make
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_loader.cc
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_12)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm_loader.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm_loader.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm_loader.cc
+
+CMakeFiles/vm.dir/vm_loader.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vm.dir/vm_loader.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/davidkamphausen/projects2/vm/src/vm_loader.cc > CMakeFiles/vm.dir/vm_loader.cc.i
+
+CMakeFiles/vm.dir/vm_loader.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vm.dir/vm_loader.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/davidkamphausen/projects2/vm/src/vm_loader.cc -o CMakeFiles/vm.dir/vm_loader.cc.s
+
+CMakeFiles/vm.dir/vm_loader.cc.o.requires:
+.PHONY : CMakeFiles/vm.dir/vm_loader.cc.o.requires
+
+CMakeFiles/vm.dir/vm_loader.cc.o.provides: CMakeFiles/vm.dir/vm_loader.cc.o.requires
+	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_loader.cc.o.provides.build
+.PHONY : CMakeFiles/vm.dir/vm_loader.cc.o.provides
+
+CMakeFiles/vm.dir/vm_loader.cc.o.provides.build: CMakeFiles/vm.dir/vm_loader.cc.o
+
+CMakeFiles/vm.dir/vm_stack.cc.o: CMakeFiles/vm.dir/flags.make
+CMakeFiles/vm.dir/vm_stack.cc.o: vm_stack.cc
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_13)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm_stack.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm_stack.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm_stack.cc
+
+CMakeFiles/vm.dir/vm_stack.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vm.dir/vm_stack.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/davidkamphausen/projects2/vm/src/vm_stack.cc > CMakeFiles/vm.dir/vm_stack.cc.i
+
+CMakeFiles/vm.dir/vm_stack.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vm.dir/vm_stack.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/davidkamphausen/projects2/vm/src/vm_stack.cc -o CMakeFiles/vm.dir/vm_stack.cc.s
+
+CMakeFiles/vm.dir/vm_stack.cc.o.requires:
+.PHONY : CMakeFiles/vm.dir/vm_stack.cc.o.requires
+
+CMakeFiles/vm.dir/vm_stack.cc.o.provides: CMakeFiles/vm.dir/vm_stack.cc.o.requires
+	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_stack.cc.o.provides.build
+.PHONY : CMakeFiles/vm.dir/vm_stack.cc.o.provides
+
+CMakeFiles/vm.dir/vm_stack.cc.o.provides.build: CMakeFiles/vm.dir/vm_stack.cc.o
+
+CMakeFiles/vm.dir/vm_ops.cc.o: CMakeFiles/vm.dir/flags.make
+CMakeFiles/vm.dir/vm_ops.cc.o: vm_ops.cc
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles $(CMAKE_PROGRESS_14)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/vm.dir/vm_ops.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/vm.dir/vm_ops.cc.o -c /Users/davidkamphausen/projects2/vm/src/vm_ops.cc
+
+CMakeFiles/vm.dir/vm_ops.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vm.dir/vm_ops.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/davidkamphausen/projects2/vm/src/vm_ops.cc > CMakeFiles/vm.dir/vm_ops.cc.i
+
+CMakeFiles/vm.dir/vm_ops.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vm.dir/vm_ops.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/davidkamphausen/projects2/vm/src/vm_ops.cc -o CMakeFiles/vm.dir/vm_ops.cc.s
+
+CMakeFiles/vm.dir/vm_ops.cc.o.requires:
+.PHONY : CMakeFiles/vm.dir/vm_ops.cc.o.requires
+
+CMakeFiles/vm.dir/vm_ops.cc.o.provides: CMakeFiles/vm.dir/vm_ops.cc.o.requires
+	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_ops.cc.o.provides.build
+.PHONY : CMakeFiles/vm.dir/vm_ops.cc.o.provides
+
+CMakeFiles/vm.dir/vm_ops.cc.o.provides.build: CMakeFiles/vm.dir/vm_ops.cc.o
+
 # Object files for target vm
 vm_OBJECTS = \
-"CMakeFiles/vm.dir/vm_memory.cc.o" \
 "CMakeFiles/vm.dir/vm.cc.o" \
+"CMakeFiles/vm.dir/vm_memory.cc.o" \
 "CMakeFiles/vm.dir/vm_regs.cc.o" \
 "CMakeFiles/vm.dir/vm_instruction.cc.o" \
 "CMakeFiles/vm.dir/vm_sim.cc.o" \
@@ -314,13 +383,16 @@ vm_OBJECTS = \
 "CMakeFiles/vm.dir/vm_threads.cc.o" \
 "CMakeFiles/vm.dir/vm_types.cc.o" \
 "CMakeFiles/vm.dir/vm_vm.cc.o" \
-"CMakeFiles/vm.dir/vm_queues.cc.o"
+"CMakeFiles/vm.dir/vm_queues.cc.o" \
+"CMakeFiles/vm.dir/vm_loader.cc.o" \
+"CMakeFiles/vm.dir/vm_stack.cc.o" \
+"CMakeFiles/vm.dir/vm_ops.cc.o"
 
 # External object files for target vm
 vm_EXTERNAL_OBJECTS =
 
-vm: CMakeFiles/vm.dir/vm_memory.cc.o
 vm: CMakeFiles/vm.dir/vm.cc.o
+vm: CMakeFiles/vm.dir/vm_memory.cc.o
 vm: CMakeFiles/vm.dir/vm_regs.cc.o
 vm: CMakeFiles/vm.dir/vm_instruction.cc.o
 vm: CMakeFiles/vm.dir/vm_sim.cc.o
@@ -330,6 +402,9 @@ vm: CMakeFiles/vm.dir/vm_threads.cc.o
 vm: CMakeFiles/vm.dir/vm_types.cc.o
 vm: CMakeFiles/vm.dir/vm_vm.cc.o
 vm: CMakeFiles/vm.dir/vm_queues.cc.o
+vm: CMakeFiles/vm.dir/vm_loader.cc.o
+vm: CMakeFiles/vm.dir/vm_stack.cc.o
+vm: CMakeFiles/vm.dir/vm_ops.cc.o
 vm: CMakeFiles/vm.dir/build.make
 vm: CMakeFiles/vm.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable vm"
@@ -339,8 +414,8 @@ vm: CMakeFiles/vm.dir/link.txt
 CMakeFiles/vm.dir/build: vm
 .PHONY : CMakeFiles/vm.dir/build
 
-CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_memory.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm.cc.o.requires
+CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_memory.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_regs.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_instruction.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_sim.cc.o.requires
@@ -350,6 +425,9 @@ CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_threads.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_types.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_vm.cc.o.requires
 CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_queues.cc.o.requires
+CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_loader.cc.o.requires
+CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_stack.cc.o.requires
+CMakeFiles/vm.dir/requires: CMakeFiles/vm.dir/vm_ops.cc.o.requires
 .PHONY : CMakeFiles/vm.dir/requires
 
 CMakeFiles/vm.dir/clean:

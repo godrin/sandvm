@@ -7,8 +7,8 @@ void VMMemoryCell::set(VMMemoryData pdata) {
 	data = pdata;
 }
 
-VMMemory::VMMemory(size_t pSize) :
-		size(pSize), cells(new VMMemoryCell[pSize]) {
+VMMemory::VMMemory(size_t pSize, std::string pTypename) :
+		size(pSize), cells(new VMMemoryCell[pSize]), type(pTypename) {
 }
 
 VMMemory::~VMMemory() {
@@ -16,17 +16,20 @@ VMMemory::~VMMemory() {
 }
 
 void VMMemory::set(VMMemoryData index, VMMemoryData data) {
-	std::cout << " set cell " << index.asSizeT() << " to " << data.asSizeT()
-			<< std::endl;
+	std::cout << " " << type << " set cell " << index.asSizeT() << " to "
+			<< data.asSizeT() << std::endl;
 	cells[index.asSizeT() % size].set(data);
 }
 
 VMMemoryData VMMemory::get(VMMemoryData index) {
-	return cells[index.asSizeT() % size].get();
+	VMMemoryData data=cells[index.asSizeT() % size].get();
+	std::cout << " " << type << " get cell " << index.asSizeT() << " which is "
+			<< data.asSizeT() << std::endl;
+	return data;
 }
 
 VMMemory *VMMemory::clone() {
-	VMMemory *c = new VMMemory(size);
+	VMMemory *c = new VMMemory(size,"Memory");
 	for (size_t i = 0; i < size; i++) {
 		c->set(i, get(i));
 	}

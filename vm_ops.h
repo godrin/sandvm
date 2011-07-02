@@ -1,6 +1,8 @@
 #ifndef VM_OPS_H
 #define VM_OPS_H
 
+#include <string>
+
 enum VMOps {
 	DAT,
 	MOVE,
@@ -19,6 +21,8 @@ enum VMOps {
 	//LDP,
 	//STP
 };
+
+std::string toString(VMOps op);
 
 
 #endif

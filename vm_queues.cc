@@ -1,11 +1,12 @@
 #include "vm_queues.h"
 
 VMQueue::VMQueue(size_t pSize) :
-		size(pSize), buffer(new VMMemoryData[size]), writePtr(0), readPtr(0) {
+		size(pSize), buffer(new VMMemoryData[size]), writePtr(1), readPtr(0) {
 
 }
 
 void VMQueue::push(VMMemoryData c) {
+
 
 }
 VMMemoryData VMQueue::pop() {

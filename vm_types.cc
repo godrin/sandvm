@@ -93,6 +93,11 @@ Uint32::Uint32(size_t p) {
 	i = p;
 }
 
+Uint32::Uint32(__type p) :
+		i(p) {
+
+}
+
 size_t Uint32::asSizeT() {
 	return i;
 }

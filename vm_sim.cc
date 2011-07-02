@@ -54,18 +54,16 @@ void runOp(VMThread *thread) {
 		std::cerr << "thread is null!" << std::endl;
 		return;
 	}
-
+	std::cout << "Run op at " << thread->getIP() << std::endl;
 	VMInstruction *i = thread->getCurrentInstruction();
 	VMArg *arg0 = i->getArg0(), *arg1 = i->getArg1();
 	VMRegisters *regs = thread->getRegisters();
 	VMMemory *memory = thread->getMemory();
 	size_t nextIP = std::string::npos;
 
-	std::cout << "AT:" << thread->getIP() << std::endl;
-
+	std::cout << toString(i->getOp()) << "-start" << std::endl;
 	switch (i->getOp()) {
 	case DAT:
-		std::cout << "DAT" << std::endl;
 		thread->die();
 		break;
 	case MOVE:
@@ -124,6 +122,7 @@ void runOp(VMThread *thread) {
 	default:
 		std::cout << "UNKNOWN" << std::endl;
 	}
+	std::cout << toString(i->getOp()) << "-end" << std::endl;
 	if (nextIP == std::string::npos)
 		nextIP = thread->getIP() + 4;
 	thread->setIP(nextIP);

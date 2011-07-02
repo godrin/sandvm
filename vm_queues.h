@@ -9,6 +9,7 @@ class VMQueue {
 	size_t size;
 	VMMemoryData *buffer;
 	size_t writePtr, readPtr;
+	enum Mode {IN,OUT,BOTH};
 
 public:
 	VMQueue(size_t pSize);

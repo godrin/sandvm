@@ -19,15 +19,17 @@ public:
 class VMMemory {
 	VMMemoryCell *cells;
 	size_t size;
+	std::string type;
 
 public:
-	VMMemory(size_t psize);
+	VMMemory(size_t psize,std::string pTypename);
 	~VMMemory();
 
 	void set(VMMemoryData index, VMMemoryData data);
 	VMMemoryData get(VMMemoryData index);
 
 	VMMemory *clone();
+
 };
 
 typedef VMMemory VMRegisters;

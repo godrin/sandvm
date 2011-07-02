@@ -26,9 +26,18 @@ CMakeFiles/vm.dir/vm_instruction.cc.o: vm_memory.h
 CMakeFiles/vm.dir/vm_instruction.cc.o: vm_ops.h
 CMakeFiles/vm.dir/vm_instruction.cc.o: vm_types.h
 
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_loader.cc
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_loader.h
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_memory.h
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_ops.h
+CMakeFiles/vm.dir/vm_loader.cc.o: vm_types.h
+
 CMakeFiles/vm.dir/vm_memory.cc.o: vm_memory.cc
 CMakeFiles/vm.dir/vm_memory.cc.o: vm_memory.h
 CMakeFiles/vm.dir/vm_memory.cc.o: vm_types.h
+
+CMakeFiles/vm.dir/vm_ops.cc.o: vm_ops.cc
+CMakeFiles/vm.dir/vm_ops.cc.o: vm_ops.h
 
 CMakeFiles/vm.dir/vm_queues.cc.o: vm_memory.h
 CMakeFiles/vm.dir/vm_queues.cc.o: vm_queues.cc
@@ -48,6 +57,11 @@ CMakeFiles/vm.dir/vm_sim.cc.o: vm_thread.h
 CMakeFiles/vm.dir/vm_sim.cc.o: vm_threads.h
 CMakeFiles/vm.dir/vm_sim.cc.o: vm_types.h
 CMakeFiles/vm.dir/vm_sim.cc.o: vm_vm.h
+
+CMakeFiles/vm.dir/vm_stack.cc.o: vm_memory.h
+CMakeFiles/vm.dir/vm_stack.cc.o: vm_stack.cc
+CMakeFiles/vm.dir/vm_stack.cc.o: vm_stack.h
+CMakeFiles/vm.dir/vm_stack.cc.o: vm_types.h
 
 CMakeFiles/vm.dir/vm_thread.cc.o: vm_arg.h
 CMakeFiles/vm.dir/vm_thread.cc.o: vm_instruction.h

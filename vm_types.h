@@ -13,7 +13,9 @@ public:
 };
 
 class Uint8 {
+public:
 	typedef unsigned int __type;
+private:
 	__type i;
 
 public:
@@ -31,18 +33,19 @@ public:
 	bool lessThan(const Uint8 &other);
 	bool equals(const Uint8 &other);
 
-	void setBit(size_t which,bool val);
+	void setBit(size_t which, bool val);
 };
 
-
-
 class Uint32 {
+public:
 	typedef unsigned int __type;
+private:
 	__type i;
 
 public:
 	Uint32();
 	Uint32(size_t p);
+	Uint32(__type p);
 	size_t asSizeT();
 	void add(const Uint32 &other);
 	void sub(const Uint32 &other);
@@ -56,7 +59,5 @@ public:
 	bool equals(const Uint32 &other);
 	Uint8 get(size_t index);
 };
-
-
 
 #endif

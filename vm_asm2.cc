@@ -10,7 +10,7 @@
 #include <iostream>
 #include <map>
 
-#define LOGLEVEL 1
+#define LOGLEVEL 5
 
 namespace Asm2 {
 
@@ -41,9 +41,10 @@ public:
 		REGISTER, // 12
 		QUEUE, // 13
 		COMMENT, // 14
-		MODIFIER
-	// 15
-	// 14
+		MODIFIER, // 15
+		ASSIGN
+	// 16
+
 	};
 
 	Lexer(std::istream &p) :
@@ -92,7 +93,7 @@ public:
 		return c >= '0' && c <= '9';
 	}
 	bool isChar(char c) {
-		return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+		return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
 	}
 
 	bool isRegister(const std::string &n) {
@@ -144,6 +145,9 @@ public:
 		} else if (la == '*') {
 			get();
 			return std::make_pair(POINT, "*");
+		} else if (la == '=') {
+			get();
+			return std::make_pair(ASSIGN, "=");
 		} else if (la == ',') {
 			get();
 			return std::make_pair(COMMA, ",");
@@ -222,6 +226,9 @@ public:
 	bool last;
 	size_t lineNumber;
 	std::string type;
+
+	bool define;
+	size_t value;
 
 	void toInstruction(VMInstruction *i) {
 		VMType t = getType();
@@ -333,6 +340,7 @@ public:
 
 		Line l;
 		l.op = INV;
+		l.define = false;
 		l.lineNumber = lineNumber;
 
 		if (current.first == Lexer::LABEL) {
@@ -390,10 +398,23 @@ public:
 					throw int();
 				}
 			} else {
-				logger(LOGLEVEL) << "Error at:" << current.first << ":"
-						<< current.second << vmlog::endl;
-				throw int();
+				logger(LOGLEVEL) << "ASSIGN constant " << current.second
+						<< vmlog::endl;
+				l.label = current.second;
+				next();
+				if (current.first == Lexer::ASSIGN) {
+					next();
+					l.define = true;
+					l.value = atoi(current.second.c_str());
+					logger(LOGLEVEL) << "ASSIGN constant " << current.second
+							<< " value:" << l.value << vmlog::endl;
+					next();
+				} else {
 
+					logger(LOGLEVEL) << "Error at:" << current.first << ":"
+							<< current.second << vmlog::endl;
+					throw int();
+				}
 			}
 
 //FIXME ARGS
@@ -434,18 +455,33 @@ void parse(std::istream &stream, VMMemory *memory, size_t start,
 	VMInstruction instruction;
 
 	while (!(l = p.getLine()).last) {
-		lines.push_back(l);
-		if (l.label.length() > 0)
-			refs.insert(std::make_pair(l.label, pos));
-		if (l.data.length() > 0) {
-			pos += l.data.length();
+
+		if (l.define) {
+			refs.insert(std::make_pair(l.label, l.value));
 		} else {
-			l.toInstruction(&instruction);
-			pos += encoder->encode(0, 0, &instruction);
+			lines.push_back(l);
+
+			if (l.label.length() > 0)
+				refs.insert(std::make_pair(l.label, pos));
+			if (l.data.length() > 0) {
+				pos += l.data.length();
+			} else {
+				l.toInstruction(&instruction);
+				pos += encoder->encode(0, 0, &instruction);
+			}
 		}
 	}
+
+	for (std::map<std::string, size_t>::iterator i = refs.begin();
+			i != refs.end(); i++) {
+		logger(LOGLEVEL) << "REFS " << i->first << ":" << i->second
+				<< vmlog::endl;
+	}
+
 	if (l.label.length() > 0)
 		refs.insert(std::make_pair(l.label, pos));
+
+	logger(LOGLEVEL) << "LINE COUNt:" << lines.size() << vmlog::endl;
 
 	for (std::vector<Line>::iterator i = lines.begin(); i != lines.end(); i++) {
 		l = *i;

@@ -35,11 +35,15 @@ int main(int argc, char *argv[]) {
 	thread->setQueues(new VMQueues(VM_QUEUE_COUNT));
 	thread->getQueues()->setQueue(0, new VMQueue(10, VMQueue::OUT));
 	thread->getQueues()->setQueue(1, new VMQueue(10, VMQueue::BOTH));
+	thread->getQueues()->setQueue(2, new VMQueue(10, VMQueue::STACK));
 	vm.getThreads()->addThread(thread);
 
-	for (int i = 0; i < 80; i++) {
+	for (int i = 0; i < 8000; i++) {
 		std::cout << "STEP " << i << std::endl;
-		runOp(vm.getThreads()->getNextThread());
+		thread = vm.getThreads()->getNextThread();
+		if (!thread)
+			break;
+		runOp(thread);
 	}
 
 	return 0;

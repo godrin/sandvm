@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#define LOGLEVEL 1
+#define LOGLEVEL 5
 
 VMMemoryData simgetdirect(VMThread *thread, VMArg *arg, VMType type) {
 	VMMemoryData data;

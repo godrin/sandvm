@@ -1,2 +1,0 @@
-/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm_run.dir
-/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm_type_sizes.dir

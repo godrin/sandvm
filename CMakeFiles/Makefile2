@@ -53,48 +53,13 @@ CMAKE_SOURCE_DIR = /Users/davidkamphausen/projects2/vm/src
 CMAKE_BINARY_DIR = /Users/davidkamphausen/projects2/vm/src
 
 #=============================================================================
-# Target rules for target CMakeFiles/vm.dir
-
-# All Build rule for target.
-CMakeFiles/vm.dir/all:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/depend
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14
-	@echo "Built target vm"
-.PHONY : CMakeFiles/vm.dir/all
-
-# Include target in all.
-all: CMakeFiles/vm.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/vm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 14
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/vm.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 0
-.PHONY : CMakeFiles/vm.dir/rule
-
-# Convenience name for target.
-vm: CMakeFiles/vm.dir/rule
-.PHONY : vm
-
-# clean rule for target.
-CMakeFiles/vm.dir/clean:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/clean
-.PHONY : CMakeFiles/vm.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/vm.dir/clean
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/vm_run.dir
 
 # All Build rule for target.
 CMakeFiles/vm_run.dir/all:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/depend
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles  15 16 17 18 19 20 21 22 23 24 25 26 27 28
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
 	@echo "Built target vm_run"
 .PHONY : CMakeFiles/vm_run.dir/all
 
@@ -104,7 +69,7 @@ all: CMakeFiles/vm_run.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/vm_run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/vm_run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 0
 .PHONY : CMakeFiles/vm_run.dir/rule
@@ -120,6 +85,41 @@ CMakeFiles/vm_run.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/vm_run.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/vm_type_sizes.dir
+
+# All Build rule for target.
+CMakeFiles/vm_type_sizes.dir/all:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/depend
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/davidkamphausen/projects2/vm/src/CMakeFiles  18
+	@echo "Built target vm_type_sizes"
+.PHONY : CMakeFiles/vm_type_sizes.dir/all
+
+# Include target in all.
+all: CMakeFiles/vm_type_sizes.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/vm_type_sizes.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/vm_type_sizes.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidkamphausen/projects2/vm/src/CMakeFiles 0
+.PHONY : CMakeFiles/vm_type_sizes.dir/rule
+
+# Convenience name for target.
+vm_type_sizes: CMakeFiles/vm_type_sizes.dir/rule
+.PHONY : vm_type_sizes
+
+# clean rule for target.
+CMakeFiles/vm_type_sizes.dir/clean:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/clean
+.PHONY : CMakeFiles/vm_type_sizes.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/vm_type_sizes.dir/clean
 .PHONY : clean
 
 #=============================================================================

@@ -4,6 +4,8 @@
 #include "vm_instruction.h"
 
 class VMVm;
+class VMEncoding;
+class VMQueues;
 
 class VMThread {
 	VMMemory *memory;
@@ -13,11 +15,14 @@ class VMThread {
 	VMInstruction currentInstruction;
 	bool alive;
 	bool zeroFlag;
+	VMEncoding *encoder;
+	VMQueues *queues;
 
 public:
 	VMThread();
 	~VMThread();
 
+	void setEncoder(VMEncoding *pEncoding);
 	void setMemory(VMMemory *m);
 	void setRegisters(VMRegisters *regs);
 	void setIP(size_t pip);
@@ -25,6 +30,8 @@ public:
 	VMInstruction *getCurrentInstruction();
 	VMRegisters *getRegisters();
 	VMMemory *getMemory();
+	VMVm *getVM();
+	void setVM(VMVm *pvm);
 	void fork(size_t pip);
 
 	void die();
@@ -34,6 +41,8 @@ public:
 
 	bool isAlive() const;
 
+	VMQueues *getQueues();
+	void setQueues(VMQueues *p);
 };
 
 #endif

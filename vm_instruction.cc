@@ -1,4 +1,5 @@
 #include "vm_instruction.h"
+#include "vm_ops.h"
 
 VMArg *VMInstruction::getArg0() {
 	return &arg0;
@@ -9,41 +10,6 @@ VMArg *VMInstruction::getArg1() {
 
 VMOps VMInstruction::getOp() {
 	return op;
-}
-
-void VMInstruction::set(VMMemory *memory, size_t ip) {
-	VMMemoryData data = memory->get(ip);
-
-#ifdef UINT32_USED
-	if (data.get(0) <= NOP) {
-		op = (VMOps) data.get(0);
-	}
-	Uint8 flags = data.get(1);
-	Uint8 aValue = data.get(2);
-	Uint8 bValue = data.get(3);
-#else
-	if (data.asSizeT() <= NOP) {
-		op = (VMOps) data.asSizeT();
-	}
-	size_t flags = memory->get(ip + 1).asSizeT();
-	size_t aValue = memory->get(ip + 2).asSizeT();
-	size_t bValue = memory->get(ip + 3).asSizeT();
-
-#endif
-
-	arg0.setDirect(flags & 1);
-	arg0.setRegister(flags & 2);
-	arg1.setDirect(flags & 4);
-	arg1.setRegister(flags & 8);
-
-	std::cout << "READ ip:"<<ip<<" a.direct:" << (int) arg0.isDirect() << " a.reg:"
-			<< (int) arg0.isRegister() << " b.direct:" << (int) arg1.isDirect()
-			<< " b.reg:" << (int) arg1.isRegister() << " flag:"
-			<< flags << std::endl;
-
-
-	arg0.setValue(aValue);
-	arg1.setValue(bValue);
 }
 
 VMInstruction ins(VMOps op, VMArg a) {
@@ -71,22 +37,45 @@ void VMInstruction::setArg1(VMArg b) {
 	arg1 = b;
 }
 
-void VMInstruction::putAt(VMMemory *memory, size_t pos) {
+VMType VMInstruction::getType() {
+	return type;
+}
+void VMInstruction::setType(VMType ptype) {
+	type = ptype;
+}
 
-	memory->set(pos++, op);
+std::string VMInstruction::toString() {
+	std::string s = "<Op";
+	s += ::toString(getOp());
+	s += ".";
+	switch (type) {
+	case BYTE:
+		s += "b";
+		break;
+	case WORD:
+		s += "w";
+		break;
+	case DWORD:
+		s += "d";
+		break;
+	}
 
-	VMMemoryData flags;
-	flags.setBit(0, arg0.isDirect());
-	flags.setBit(1, arg0.isRegister());
-	flags.setBit(2, arg1.isDirect());
-	flags.setBit(3, arg1.isRegister());
-	std::cout << "a.direct ip:"<<(pos-1)<<" :" << (int) arg0.isDirect() << " a.reg:"
-			<< (int) arg0.isRegister() << " b.direct:" << (int) arg1.isDirect()
-			<< " b.reg:" << (int) arg1.isRegister() << " flag:"
-			<< flags.asSizeT() << std::endl;
+	s += " ";
+	size_t arity = opSize(getOp());
+	if (arity > 0) {
+		s += " arg0:";
+		s += arg0.toString(getType());
+	}
+	if (arity > 1) {
+		s += " arg1:";
+		s += arg1.toString(getType());
+	}
+	return s + ">";
+}
 
-	memory->set(pos++, flags);
-	memory->set(pos++, arg0.getValue());
-	memory->set(pos++, arg1.getValue());
-
+size_t VMInstruction::getLen() {
+	return len;
+}
+void VMInstruction::setLen(size_t l) {
+	len = l;
 }

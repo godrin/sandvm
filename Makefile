@@ -99,19 +99,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named vm
-
-# Build rule for target.
-vm: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 vm
-.PHONY : vm
-
-# fast build rule for target.
-vm/fast:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/build
-.PHONY : vm/fast
-
-#=============================================================================
 # Target rules for targets named vm_run
 
 # Build rule for target.
@@ -124,36 +111,24 @@ vm_run/fast:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/build
 .PHONY : vm_run/fast
 
-vm.o: vm.cc.o
-.PHONY : vm.o
+#=============================================================================
+# Target rules for targets named vm_type_sizes
 
-# target to build an object file
-vm.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm.cc.o
-.PHONY : vm.cc.o
+# Build rule for target.
+vm_type_sizes: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 vm_type_sizes
+.PHONY : vm_type_sizes
 
-vm.i: vm.cc.i
-.PHONY : vm.i
-
-# target to preprocess a source file
-vm.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm.cc.i
-.PHONY : vm.cc.i
-
-vm.s: vm.cc.s
-.PHONY : vm.s
-
-# target to generate assembly for a file
-vm.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm.cc.s
-.PHONY : vm.cc.s
+# fast build rule for target.
+vm_type_sizes/fast:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/build
+.PHONY : vm_type_sizes/fast
 
 vm_arg.o: vm_arg.cc.o
 .PHONY : vm_arg.o
 
 # target to build an object file
 vm_arg.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_arg.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_arg.cc.o
 .PHONY : vm_arg.cc.o
 
@@ -162,7 +137,6 @@ vm_arg.i: vm_arg.cc.i
 
 # target to preprocess a source file
 vm_arg.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_arg.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_arg.cc.i
 .PHONY : vm_arg.cc.i
 
@@ -171,16 +145,62 @@ vm_arg.s: vm_arg.cc.s
 
 # target to generate assembly for a file
 vm_arg.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_arg.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_arg.cc.s
 .PHONY : vm_arg.cc.s
+
+vm_asm2.o: vm_asm2.cc.o
+.PHONY : vm_asm2.o
+
+# target to build an object file
+vm_asm2.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.o
+.PHONY : vm_asm2.cc.o
+
+vm_asm2.i: vm_asm2.cc.i
+.PHONY : vm_asm2.i
+
+# target to preprocess a source file
+vm_asm2.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.i
+.PHONY : vm_asm2.cc.i
+
+vm_asm2.s: vm_asm2.cc.s
+.PHONY : vm_asm2.s
+
+# target to generate assembly for a file
+vm_asm2.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.s
+.PHONY : vm_asm2.cc.s
+
+vm_encoding.o: vm_encoding.cc.o
+.PHONY : vm_encoding.o
+
+# target to build an object file
+vm_encoding.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_encoding.cc.o
+.PHONY : vm_encoding.cc.o
+
+vm_encoding.i: vm_encoding.cc.i
+.PHONY : vm_encoding.i
+
+# target to preprocess a source file
+vm_encoding.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_encoding.cc.i
+.PHONY : vm_encoding.cc.i
+
+vm_encoding.s: vm_encoding.cc.s
+.PHONY : vm_encoding.s
+
+# target to generate assembly for a file
+vm_encoding.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_encoding.cc.s
+.PHONY : vm_encoding.cc.s
 
 vm_instruction.o: vm_instruction.cc.o
 .PHONY : vm_instruction.o
 
 # target to build an object file
 vm_instruction.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_instruction.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_instruction.cc.o
 .PHONY : vm_instruction.cc.o
 
@@ -189,7 +209,6 @@ vm_instruction.i: vm_instruction.cc.i
 
 # target to preprocess a source file
 vm_instruction.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_instruction.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_instruction.cc.i
 .PHONY : vm_instruction.cc.i
 
@@ -198,43 +217,38 @@ vm_instruction.s: vm_instruction.cc.s
 
 # target to generate assembly for a file
 vm_instruction.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_instruction.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_instruction.cc.s
 .PHONY : vm_instruction.cc.s
 
-vm_loader.o: vm_loader.cc.o
-.PHONY : vm_loader.o
+vm_log.o: vm_log.cc.o
+.PHONY : vm_log.o
 
 # target to build an object file
-vm_loader.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_loader.cc.o
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_loader.cc.o
-.PHONY : vm_loader.cc.o
+vm_log.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_log.cc.o
+.PHONY : vm_log.cc.o
 
-vm_loader.i: vm_loader.cc.i
-.PHONY : vm_loader.i
+vm_log.i: vm_log.cc.i
+.PHONY : vm_log.i
 
 # target to preprocess a source file
-vm_loader.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_loader.cc.i
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_loader.cc.i
-.PHONY : vm_loader.cc.i
+vm_log.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_log.cc.i
+.PHONY : vm_log.cc.i
 
-vm_loader.s: vm_loader.cc.s
-.PHONY : vm_loader.s
+vm_log.s: vm_log.cc.s
+.PHONY : vm_log.s
 
 # target to generate assembly for a file
-vm_loader.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_loader.cc.s
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_loader.cc.s
-.PHONY : vm_loader.cc.s
+vm_log.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_log.cc.s
+.PHONY : vm_log.cc.s
 
 vm_memory.o: vm_memory.cc.o
 .PHONY : vm_memory.o
 
 # target to build an object file
 vm_memory.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_memory.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_memory.cc.o
 .PHONY : vm_memory.cc.o
 
@@ -243,7 +257,6 @@ vm_memory.i: vm_memory.cc.i
 
 # target to preprocess a source file
 vm_memory.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_memory.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_memory.cc.i
 .PHONY : vm_memory.cc.i
 
@@ -252,7 +265,6 @@ vm_memory.s: vm_memory.cc.s
 
 # target to generate assembly for a file
 vm_memory.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_memory.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_memory.cc.s
 .PHONY : vm_memory.cc.s
 
@@ -261,7 +273,6 @@ vm_ops.o: vm_ops.cc.o
 
 # target to build an object file
 vm_ops.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_ops.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_ops.cc.o
 .PHONY : vm_ops.cc.o
 
@@ -270,7 +281,6 @@ vm_ops.i: vm_ops.cc.i
 
 # target to preprocess a source file
 vm_ops.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_ops.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_ops.cc.i
 .PHONY : vm_ops.cc.i
 
@@ -279,7 +289,6 @@ vm_ops.s: vm_ops.cc.s
 
 # target to generate assembly for a file
 vm_ops.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_ops.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_ops.cc.s
 .PHONY : vm_ops.cc.s
 
@@ -288,7 +297,6 @@ vm_queues.o: vm_queues.cc.o
 
 # target to build an object file
 vm_queues.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_queues.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_queues.cc.o
 .PHONY : vm_queues.cc.o
 
@@ -297,7 +305,6 @@ vm_queues.i: vm_queues.cc.i
 
 # target to preprocess a source file
 vm_queues.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_queues.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_queues.cc.i
 .PHONY : vm_queues.cc.i
 
@@ -306,7 +313,6 @@ vm_queues.s: vm_queues.cc.s
 
 # target to generate assembly for a file
 vm_queues.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_queues.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_queues.cc.s
 .PHONY : vm_queues.cc.s
 
@@ -315,7 +321,6 @@ vm_regs.o: vm_regs.cc.o
 
 # target to build an object file
 vm_regs.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_regs.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.o
 .PHONY : vm_regs.cc.o
 
@@ -324,7 +329,6 @@ vm_regs.i: vm_regs.cc.i
 
 # target to preprocess a source file
 vm_regs.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_regs.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.i
 .PHONY : vm_regs.cc.i
 
@@ -333,7 +337,6 @@ vm_regs.s: vm_regs.cc.s
 
 # target to generate assembly for a file
 vm_regs.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_regs.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.s
 .PHONY : vm_regs.cc.s
 
@@ -366,7 +369,6 @@ vm_sim.o: vm_sim.cc.o
 
 # target to build an object file
 vm_sim.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_sim.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_sim.cc.o
 .PHONY : vm_sim.cc.o
 
@@ -375,7 +377,6 @@ vm_sim.i: vm_sim.cc.i
 
 # target to preprocess a source file
 vm_sim.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_sim.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_sim.cc.i
 .PHONY : vm_sim.cc.i
 
@@ -384,7 +385,6 @@ vm_sim.s: vm_sim.cc.s
 
 # target to generate assembly for a file
 vm_sim.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_sim.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_sim.cc.s
 .PHONY : vm_sim.cc.s
 
@@ -393,7 +393,6 @@ vm_stack.o: vm_stack.cc.o
 
 # target to build an object file
 vm_stack.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_stack.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_stack.cc.o
 .PHONY : vm_stack.cc.o
 
@@ -402,7 +401,6 @@ vm_stack.i: vm_stack.cc.i
 
 # target to preprocess a source file
 vm_stack.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_stack.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_stack.cc.i
 .PHONY : vm_stack.cc.i
 
@@ -411,7 +409,6 @@ vm_stack.s: vm_stack.cc.s
 
 # target to generate assembly for a file
 vm_stack.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_stack.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_stack.cc.s
 .PHONY : vm_stack.cc.s
 
@@ -420,7 +417,6 @@ vm_thread.o: vm_thread.cc.o
 
 # target to build an object file
 vm_thread.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_thread.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_thread.cc.o
 .PHONY : vm_thread.cc.o
 
@@ -429,7 +425,6 @@ vm_thread.i: vm_thread.cc.i
 
 # target to preprocess a source file
 vm_thread.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_thread.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_thread.cc.i
 .PHONY : vm_thread.cc.i
 
@@ -438,7 +433,6 @@ vm_thread.s: vm_thread.cc.s
 
 # target to generate assembly for a file
 vm_thread.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_thread.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_thread.cc.s
 .PHONY : vm_thread.cc.s
 
@@ -447,7 +441,6 @@ vm_threads.o: vm_threads.cc.o
 
 # target to build an object file
 vm_threads.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_threads.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_threads.cc.o
 .PHONY : vm_threads.cc.o
 
@@ -456,7 +449,6 @@ vm_threads.i: vm_threads.cc.i
 
 # target to preprocess a source file
 vm_threads.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_threads.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_threads.cc.i
 .PHONY : vm_threads.cc.i
 
@@ -465,16 +457,62 @@ vm_threads.s: vm_threads.cc.s
 
 # target to generate assembly for a file
 vm_threads.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_threads.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_threads.cc.s
 .PHONY : vm_threads.cc.s
+
+vm_tools.o: vm_tools.cc.o
+.PHONY : vm_tools.o
+
+# target to build an object file
+vm_tools.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_tools.cc.o
+.PHONY : vm_tools.cc.o
+
+vm_tools.i: vm_tools.cc.i
+.PHONY : vm_tools.i
+
+# target to preprocess a source file
+vm_tools.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_tools.cc.i
+.PHONY : vm_tools.cc.i
+
+vm_tools.s: vm_tools.cc.s
+.PHONY : vm_tools.s
+
+# target to generate assembly for a file
+vm_tools.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_tools.cc.s
+.PHONY : vm_tools.cc.s
+
+vm_type_sizes.o: vm_type_sizes.cc.o
+.PHONY : vm_type_sizes.o
+
+# target to build an object file
+vm_type_sizes.cc.o:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/vm_type_sizes.cc.o
+.PHONY : vm_type_sizes.cc.o
+
+vm_type_sizes.i: vm_type_sizes.cc.i
+.PHONY : vm_type_sizes.i
+
+# target to preprocess a source file
+vm_type_sizes.cc.i:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/vm_type_sizes.cc.i
+.PHONY : vm_type_sizes.cc.i
+
+vm_type_sizes.s: vm_type_sizes.cc.s
+.PHONY : vm_type_sizes.s
+
+# target to generate assembly for a file
+vm_type_sizes.cc.s:
+	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/vm_type_sizes.cc.s
+.PHONY : vm_type_sizes.cc.s
 
 vm_types.o: vm_types.cc.o
 .PHONY : vm_types.o
 
 # target to build an object file
 vm_types.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_types.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_types.cc.o
 .PHONY : vm_types.cc.o
 
@@ -483,7 +521,6 @@ vm_types.i: vm_types.cc.i
 
 # target to preprocess a source file
 vm_types.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_types.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_types.cc.i
 .PHONY : vm_types.cc.i
 
@@ -492,7 +529,6 @@ vm_types.s: vm_types.cc.s
 
 # target to generate assembly for a file
 vm_types.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_types.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_types.cc.s
 .PHONY : vm_types.cc.s
 
@@ -501,7 +537,6 @@ vm_vm.o: vm_vm.cc.o
 
 # target to build an object file
 vm_vm.cc.o:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_vm.cc.o
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_vm.cc.o
 .PHONY : vm_vm.cc.o
 
@@ -510,7 +545,6 @@ vm_vm.i: vm_vm.cc.i
 
 # target to preprocess a source file
 vm_vm.cc.i:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_vm.cc.i
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_vm.cc.i
 .PHONY : vm_vm.cc.i
 
@@ -519,7 +553,6 @@ vm_vm.s: vm_vm.cc.s
 
 # target to generate assembly for a file
 vm_vm.cc.s:
-	$(MAKE) -f CMakeFiles/vm.dir/build.make CMakeFiles/vm.dir/vm_vm.cc.s
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_vm.cc.s
 .PHONY : vm_vm.cc.s
 
@@ -531,20 +564,23 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... vm"
 	@echo "... vm_run"
-	@echo "... vm.o"
-	@echo "... vm.i"
-	@echo "... vm.s"
+	@echo "... vm_type_sizes"
 	@echo "... vm_arg.o"
 	@echo "... vm_arg.i"
 	@echo "... vm_arg.s"
+	@echo "... vm_asm2.o"
+	@echo "... vm_asm2.i"
+	@echo "... vm_asm2.s"
+	@echo "... vm_encoding.o"
+	@echo "... vm_encoding.i"
+	@echo "... vm_encoding.s"
 	@echo "... vm_instruction.o"
 	@echo "... vm_instruction.i"
 	@echo "... vm_instruction.s"
-	@echo "... vm_loader.o"
-	@echo "... vm_loader.i"
-	@echo "... vm_loader.s"
+	@echo "... vm_log.o"
+	@echo "... vm_log.i"
+	@echo "... vm_log.s"
 	@echo "... vm_memory.o"
 	@echo "... vm_memory.i"
 	@echo "... vm_memory.s"
@@ -572,6 +608,12 @@ help:
 	@echo "... vm_threads.o"
 	@echo "... vm_threads.i"
 	@echo "... vm_threads.s"
+	@echo "... vm_tools.o"
+	@echo "... vm_tools.i"
+	@echo "... vm_tools.s"
+	@echo "... vm_type_sizes.o"
+	@echo "... vm_type_sizes.i"
+	@echo "... vm_type_sizes.s"
 	@echo "... vm_types.o"
 	@echo "... vm_types.i"
 	@echo "... vm_types.s"

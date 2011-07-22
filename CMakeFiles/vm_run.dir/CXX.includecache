@@ -11,6 +11,8 @@ vm_types.h
 /Users/davidkamphausen/projects2/vm/src/vm_types.h
 vm_memory.h
 /Users/davidkamphausen/projects2/vm/src/vm_memory.h
+string
+-
 
 /Users/davidkamphausen/projects2/vm/src/vm_instruction.h
 vm_ops.h
@@ -18,6 +20,14 @@ vm_ops.h
 vm_arg.h
 /Users/davidkamphausen/projects2/vm/src/vm_arg.h
 vector
+-
+string
+-
+
+/Users/davidkamphausen/projects2/vm/src/vm_log.h
+iostream
+-
+string
 -
 
 /Users/davidkamphausen/projects2/vm/src/vm_memory.h
@@ -45,6 +55,8 @@ vm_vm.h
 /Users/davidkamphausen/projects2/vm/src/vm_vm.h
 vm_thread.h
 /Users/davidkamphausen/projects2/vm/src/vm_thread.h
+vm_log.h
+/Users/davidkamphausen/projects2/vm/src/vm_log.h
 iostream
 -
 string

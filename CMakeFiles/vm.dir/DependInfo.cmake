@@ -6,8 +6,9 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/Users/davidkamphausen/projects2/vm/src/vm.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_arg.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_arg.cc.o"
+  "/Users/davidkamphausen/projects2/vm/src/vm_asm2.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_asm2.cc.o"
+  "/Users/davidkamphausen/projects2/vm/src/vm_encoding.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_encoding.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_instruction.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_instruction.cc.o"
-  "/Users/davidkamphausen/projects2/vm/src/vm_loader.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_loader.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_memory.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_memory.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_ops.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_ops.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_queues.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_queues.cc.o"
@@ -16,6 +17,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/Users/davidkamphausen/projects2/vm/src/vm_stack.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_stack.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_thread.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_thread.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_threads.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_threads.cc.o"
+  "/Users/davidkamphausen/projects2/vm/src/vm_tools.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_tools.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_types.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_types.cc.o"
   "/Users/davidkamphausen/projects2/vm/src/vm_vm.cc" "/Users/davidkamphausen/projects2/vm/src/CMakeFiles/vm.dir/vm_vm.cc.o"
   )

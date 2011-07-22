@@ -17,12 +17,19 @@ enum VMOps {
 	SPL, // split off thread
 	SLT, // less than -> zflag=>true
 	CMP, //equal -> zflag=>true
-	NOP
+	NOP,
+	INV, // INVALID
+	PUSH,
+	POP,
 	//LDP,
 	//STP
+	INVALID_OP
 };
 
 std::string toString(VMOps op);
+
+size_t opSize(VMOps op);
+VMOps getOp(const std::string &s);
 
 
 #endif

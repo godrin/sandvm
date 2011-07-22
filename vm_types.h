@@ -3,6 +3,11 @@
 
 #include <stddef.h>
 
+
+enum VMType {
+	BYTE, WORD, DWORD, ADDRESS, INVALID_TYPE
+};
+
 class Uint64 {
 	unsigned char data[8];
 
@@ -12,52 +17,57 @@ public:
 	void add(const Uint64 &other);
 };
 
-class Uint8 {
+typedef unsigned char Uint8;
+typedef unsigned short int Uint16;
+typedef unsigned int Uint32;
+
+class Uint8C {
 public:
-	typedef unsigned int __type;
+	typedef Uint8 __type;
 private:
 	__type i;
 
 public:
-	Uint8();
-	Uint8(size_t p);
+	Uint8C();
+	Uint8C(size_t p);
 	size_t asSizeT();
-	void add(const Uint8 &other);
-	void sub(const Uint8 &other);
-	void mul(const Uint8 &other);
-	void div(const Uint8 &other);
-	void mod(const Uint8 &other);
+	__type value();
+	void add(const Uint8C &other);
+	void sub(const Uint8C &other);
+	void mul(const Uint8C &other);
+	void div(const Uint8C &other);
+	void mod(const Uint8C &other);
 	bool isZero() const;
 	void dec();
 	void inc();
-	bool lessThan(const Uint8 &other);
-	bool equals(const Uint8 &other);
+	bool lessThan(const Uint8C &other);
+	bool equals(const Uint8C &other);
 
 	void setBit(size_t which, bool val);
 };
 
-class Uint32 {
+class Uint32C {
 public:
 	typedef unsigned int __type;
 private:
 	__type i;
 
 public:
-	Uint32();
-	Uint32(size_t p);
-	Uint32(__type p);
+	Uint32C();
+	Uint32C(size_t p);
+	Uint32C(__type p);
 	size_t asSizeT();
-	void add(const Uint32 &other);
-	void sub(const Uint32 &other);
-	void mul(const Uint32 &other);
-	void div(const Uint32 &other);
-	void mod(const Uint32 &other);
+	void add(const Uint32C &other);
+	void sub(const Uint32C &other);
+	void mul(const Uint32C &other);
+	void div(const Uint32C &other);
+	void mod(const Uint32C &other);
 	bool isZero() const;
 	void dec();
 	void inc();
-	bool lessThan(const Uint32 &other);
-	bool equals(const Uint32 &other);
-	Uint8 get(size_t index);
+	bool lessThan(const Uint32C &other);
+	bool equals(const Uint32C &other);
+	Uint8C get(size_t index);
 };
 
 #endif

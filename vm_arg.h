@@ -4,6 +4,8 @@
 #include "vm_types.h"
 #include "vm_memory.h"
 
+#include <string>
+
 /*
  *
  * "R" - existant => register - not => address
@@ -11,26 +13,36 @@
  */
 
 class VMArg {
-	VMMemoryData value;
+	//VMMemoryData value;
 	bool mRegister;
 	bool indirect;
+	union {
+		Uint8 byte;
+		Uint16 word;
+		Uint32 dword;
+	};
 public:
 	bool isRegister();
 	bool isAddress();
 
 	bool isIndirect();
 	bool isDirect();
-	VMMemoryData getValue();
+	VMMemoryData getValue(VMType t);
+	Uint8 getUint8();
+	Uint16 getUint16();
+	Uint32 getUint32();
+	void set(Uint8 v);
+	void set(Uint16 v);
+	void set(Uint32 v);
 
-	void setValue(VMMemoryData data);
+
+	void setValue(VMMemoryData data,VMType t);
 	void setRegister(bool reg);
 	void setDirect(bool d);
+
+	std::string toString(VMType t);
 };
 
-VMArg reg(VMMemoryData d);
-VMArg ireg(VMMemoryData d);
-VMArg val(VMMemoryData d);
-VMArg mem(VMMemoryData d);
 
 #endif
 

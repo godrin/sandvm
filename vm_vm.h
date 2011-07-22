@@ -7,17 +7,14 @@
 
 class VMVm {
 	VMMemory *memory;
-	VMQueues *queues;
 	VMThreads *threads;
 
 public:
 	VMVm();
 	VMMemory *getMemory();
-	VMQueues *getQueues();
 	VMThreads *getThreads();
 
 	void setMemory(VMMemory *p);
-	void setQueues(VMQueues *p);
 	void setThreads(VMThreads *p);
 };
 

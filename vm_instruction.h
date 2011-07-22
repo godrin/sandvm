@@ -5,27 +5,33 @@
 #include "vm_arg.h"
 
 #include <vector>
+#include <string>
+
 
 class VMInstruction {
 	VMOps op;
-	VMArg arg0,arg1;
+	VMArg arg0, arg1;
+	VMType type;
+	size_t len;
 
 public:
 	VMOps getOp();
+	VMType getType();
+	void setType(VMType type);
 
 	VMArg *getArg0();
 	VMArg *getArg1();
-
-	void set(VMMemory *memory,size_t ip);
 
 	void setOp(VMOps op);
 	void setArg0(VMArg a);
 	void setArg1(VMArg a);
 
-	void putAt(VMMemory *memory,size_t pos);
+	std::string toString();
+	size_t getLen();
+	void setLen(size_t l);
 };
 
-VMInstruction ins(VMOps op,VMArg a);
-VMInstruction ins(VMOps op,VMArg a,VMArg b);
+VMInstruction ins(VMOps op, VMArg a);
+VMInstruction ins(VMOps op, VMArg a, VMArg b);
 
 #endif

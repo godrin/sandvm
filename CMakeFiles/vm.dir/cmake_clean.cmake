@@ -10,9 +10,11 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/vm.dir/vm_types.cc.o"
   "CMakeFiles/vm.dir/vm_vm.cc.o"
   "CMakeFiles/vm.dir/vm_queues.cc.o"
-  "CMakeFiles/vm.dir/vm_loader.cc.o"
   "CMakeFiles/vm.dir/vm_stack.cc.o"
   "CMakeFiles/vm.dir/vm_ops.cc.o"
+  "CMakeFiles/vm.dir/vm_asm2.cc.o"
+  "CMakeFiles/vm.dir/vm_tools.cc.o"
+  "CMakeFiles/vm.dir/vm_encoding.cc.o"
   "vm.pdb"
   "vm"
 )

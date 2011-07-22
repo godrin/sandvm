@@ -7,7 +7,7 @@
 
 #include "vm_types.h"
 
-typedef Uint8 VMMemoryData;
+typedef Uint8C VMMemoryData;
 
 class VMMemoryCell {
 	VMMemoryData data;

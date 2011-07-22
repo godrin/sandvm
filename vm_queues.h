@@ -5,16 +5,38 @@
 
 #include "vm_memory.h"
 
+class VMQueueEnd {
+public:
+	virtual VMMemoryData push(VMMemoryData data)=0;
+};
+
+class VMQueueOverflow {
+
+};
+class VMQueueWrongUse {
+
+};
+class VMQueueEmpty {
+
+};
+
 class VMQueue {
+public:
+	enum Mode {
+		IN, OUT, BOTH, STACK
+	};
+private:
 	size_t size;
 	VMMemoryData *buffer;
 	size_t writePtr, readPtr;
-	enum Mode {IN,OUT,BOTH};
+	Mode mode;
+	VMQueueEnd *queueEnd;
 
 public:
-	VMQueue(size_t pSize);
+	VMQueue(size_t pSize, Mode pmode);
 	void push(VMMemoryData c);
 	VMMemoryData pop();
+
 };
 
 class VMQueues {
@@ -23,6 +45,7 @@ class VMQueues {
 public:
 	VMQueues(size_t count);
 	VMQueue *getQueue(size_t index);
+	void setQueue(size_t index, VMQueue *queue);
 
 };
 

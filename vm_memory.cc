@@ -1,4 +1,7 @@
 #include "vm_memory.h"
+#include "vm_log.h"
+
+#define LOGLEVEL 2
 
 VMMemoryData VMMemoryCell::get() {
 	return data;
@@ -16,20 +19,20 @@ VMMemory::~VMMemory() {
 }
 
 void VMMemory::set(VMMemoryData index, VMMemoryData data) {
-	std::cout << " " << type << " set cell " << index.asSizeT() << " to "
-			<< data.asSizeT() << std::endl;
+	logger(LOGLEVEL) << " " << type << " set cell " << index.asSizeT() << " to "
+			<< data.asSizeT() << vmlog::endl;
 	cells[index.asSizeT() % size].set(data);
 }
 
 VMMemoryData VMMemory::get(VMMemoryData index) {
-	VMMemoryData data=cells[index.asSizeT() % size].get();
-	std::cout << " " << type << " get cell " << index.asSizeT() << " which is "
-			<< data.asSizeT() << std::endl;
+	VMMemoryData data = cells[index.asSizeT() % size].get();
+	logger(LOGLEVEL) << " " << type << " get cell " << index.asSizeT() << " which is "
+			<< data.asSizeT() << vmlog::endl;
 	return data;
 }
 
 VMMemory *VMMemory::clone() {
-	VMMemory *c = new VMMemory(size,"Memory");
+	VMMemory *c = new VMMemory(size, "Memory");
 	for (size_t i = 0; i < size; i++) {
 		c->set(i, get(i));
 	}

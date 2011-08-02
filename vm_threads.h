@@ -12,7 +12,11 @@ public:
 	~VMThreads();
 	VMThread *getNextThread();
 	void rmThread(VMThread *thread);
-	bool addThread(VMThread *thread);
+	// 0  == nil
+	// >0 threadid
+	size_t addThread(VMThread *thread);
+	// index+1 !
+	VMThread *getThread(size_t index);
 };
 
 #endif

@@ -18,9 +18,18 @@ class VMThread {
 	VMEncoding *encoder;
 	VMQueues *queues;
 
+	size_t id;
+	size_t parentId;
+
 public:
 	VMThread();
 	~VMThread();
+
+	void setId(size_t pid);
+	size_t getId();
+
+	void setParentId(size_t p);
+	size_t getParentId();
 
 	void setEncoder(VMEncoding *pEncoding);
 	void setMemory(VMMemory *m);
@@ -32,7 +41,8 @@ public:
 	VMMemory *getMemory();
 	VMVm *getVM();
 	void setVM(VMVm *pvm);
-	void fork(size_t pip);
+	// returns threadid (which is normally >0 or 0 is nil)
+	size_t fork(size_t pip);
 
 	void die();
 
@@ -43,6 +53,9 @@ public:
 
 	VMQueues *getQueues();
 	void setQueues(VMQueues *p);
+private:
+	void checkQueues();
+
 };
 
 #endif

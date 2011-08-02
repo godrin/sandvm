@@ -31,11 +31,22 @@ std::string toString(VMOps op) {
 		return "CMP";
 	case NOP:
 		return "NOP";
-	case PUSH:
-		return "PUSH";
-	case POP:
-		return "POP";
-
+	case PUSHQ:
+		return "PUSHQ";
+	case POPQ:
+		return "POPQ";
+	case PUSHP:
+		return "PUSHP";
+	case POPP:
+		return "POPP";
+	case PUSHS:
+		return "PUSHS";
+	case POPS:
+		return "POPS";
+	case JOIN:
+		return "JOIN";
+	case THREADP:
+		return "THREADP";
 	}
 	return "UNKNOWN";
 }
@@ -70,10 +81,22 @@ VMOps getOp(const std::string &x) {
 		return CMP;
 	if (s == "NOP")
 		return NOP;
-	if (s == "PUSH")
-		return PUSH;
-	if (s == "POP")
-		return POP;
+	if (s == "PUSHQ")
+		return PUSHQ;
+	if (s == "POPQ")
+		return POPQ;
+	if (s == "PUSHS")
+		return PUSHS;
+	if (s == "POPS")
+		return POPS;
+	if (s == "PUSHP")
+		return PUSHP;
+	if (s == "POPP")
+		return POPP;
+	if (s == "JOIN")
+		return JOIN;
+	if (s == "THREADP")
+		return THREADP;
 	return INV;
 }
 
@@ -87,20 +110,26 @@ size_t opSize(VMOps op) {
 	case MUL:
 	case DIV:
 	case MOD:
+	case SPL:
 		return 2;
 	case JMP:
 	case JMZ:
 	case JMN:
-	case SPL:
 	case SLT:
+	case JOIN:
 		return 1;
 	case CMP:
 		return 2;
 	case NOP:
 		return 0;
-	case PUSH:
+	case PUSHQ:
+	case POPQ:
+	case PUSHS:
+	case POPS:
+	case PUSHP:
+	case POPP:
+	case THREADP:
 		return 2;
-	case POP:
 		return 2;
 
 	}

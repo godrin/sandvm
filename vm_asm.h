@@ -5,9 +5,10 @@
 
 class VMMemory;
 class VMEncoding;
+class VMConfig;
 
 namespace Asm2 {
 void parse(std::istream &stream, VMMemory *memory, size_t start,
-		VMEncoding *encoder);
+		VMEncoding *encoder,VMConfig *config);
 }
 #endif

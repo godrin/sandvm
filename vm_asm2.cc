@@ -6,6 +6,7 @@
 #include "vm_log.h"
 #include "vm_instruction.h"
 #include "vm_encoding.h"
+#include "vm_config.h"
 
 #include <iostream>
 #include <map>
@@ -411,8 +412,9 @@ public:
 					next();
 				} else {
 
-					logger(LOGLEVEL) << "Error at:" << current.first << ":"
-							<< current.second << vmlog::endl;
+					logger(LOGLEVEL) << "Unknown Command " << l.label << " at:"
+							<< current.first << ":" << current.second
+							<< " in line " << lineNumber << vmlog::endl;
 					throw int();
 				}
 			}
@@ -442,7 +444,7 @@ private:
 };
 
 void parse(std::istream &stream, VMMemory *memory, size_t start,
-		VMEncoding *encoder) {
+		VMEncoding *encoder, VMConfig *config) {
 	Lexer lexer(stream);
 
 	NuParser p(&lexer, memory);
@@ -458,11 +460,26 @@ void parse(std::istream &stream, VMMemory *memory, size_t start,
 
 		if (l.define) {
 			refs.insert(std::make_pair(l.label, l.value));
+			if (l.label == "_queueCount") {
+				config->setQueueCount(l.value);
+			} else if (l.label == "_stackCount") {
+				config->setStackCount(l.value);
+			} else if (l.label == "_threadCount") {
+				config->setThreadCount(l.value);
+			} else if (l.label == "_registerCount") {
+				config->setRegisterCount(l.value);
+			} else if (l.label == "_memorySize") {
+				config->setMemorySize(l.value);
+			} else if (l.label == "_queueSize") {
+				config->setQueueSize(l.value);
+			}
+
 		} else {
 			lines.push_back(l);
 
-			if (l.label.length() > 0)
+			if (l.label.length() > 0) {
 				refs.insert(std::make_pair(l.label, pos));
+			}
 			if (l.data.length() > 0) {
 				pos += l.data.length();
 			} else {

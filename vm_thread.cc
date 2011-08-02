@@ -11,14 +11,19 @@ VMThread::VMThread() {
 	vm = 0;
 	queues = 0;
 	alive = true;
+	encoder = 0;
 	logger(LOGLEVEL) << " nu thread" << vmlog::endl;
+	id = 0;
 }
 
 VMThread::~VMThread() {
+	if (vm)
+		vm->threadDeleted(id);
 	logger(LOGLEVEL) << " ~VMThread" << vmlog::endl;
 	logger(LOGLEVEL) << "registers[0]=" << registers->get(0).value()
 			<< vmlog::endl;
 	delete registers;
+	delete queues;
 	logger(LOGLEVEL) << " ~VMThread" << vmlog::endl;
 }
 
@@ -58,12 +63,20 @@ bool VMThread::getZeroFlag() const {
 	return zeroFlag;
 }
 
-void VMThread::fork(size_t pip) {
+size_t VMThread::fork(size_t pip) {
 	VMThread *t = new VMThread();
 	t->setMemory(getMemory());
 	t->setRegisters(getRegisters()->clone());
 	t->setIP(pip);
-	vm->getThreads()->addThread(t);
+	t->setEncoder(encoder);
+	t->setQueues(queues->clone(id, getVM()->getConfig()));
+
+	t->getQueues()->setPipe(VMQueues::IO, getVM()->getIOPipe());
+	t->getQueues()->setPipe(VMQueues::API, getVM()->getAPIPipe());
+
+	size_t threadId = vm->getThreads()->addThread(t);
+
+	return threadId;
 }
 
 bool VMThread::isAlive() const {
@@ -79,6 +92,8 @@ VMVm *VMThread::getVM() {
 
 void VMThread::setVM(VMVm *pvm) {
 	vm = pvm;
+
+	checkQueues();
 }
 
 VMQueues *VMThread::getQueues() {
@@ -86,4 +101,22 @@ VMQueues *VMThread::getQueues() {
 }
 void VMThread::setQueues(VMQueues *p) {
 	queues = p;
+
+	checkQueues();
+}
+
+void VMThread::setId(size_t pid) {
+	id = pid;
+}
+size_t VMThread::getId() {
+	return id;
+}
+
+void VMThread::checkQueues() {
+	if (queues && vm) {
+		if (!queues->getQueueUnchecked(0, QUEUE_TYPE_PIPE)) {
+			queues->setPipe(VMQueues::IO,vm->getIOPipe());
+			queues->setPipe(VMQueues::API,vm->getAPIPipe());
+		}
+	}
 }

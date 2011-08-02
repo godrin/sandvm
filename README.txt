@@ -12,3 +12,8 @@ There will be a pipe for either
 
 A function based 
   
+  
+  
+=== Threads
+* if a thread is created
+** 

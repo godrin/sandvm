@@ -5,6 +5,7 @@
 #define VM_MEMORY_SIZE 80000
 #define VM_QUEUE_COUNT 80
 #define VM_REGISTER_COUNT 80
+#define VM_QUEUE_SIZE 1024
 
 
 #endif

@@ -23,6 +23,8 @@ VMThreads::~VMThreads() {
 	delete[] threads;
 }
 VMThread *VMThreads::getNextThread() {
+	if (maxCount == 0)
+		return 0;
 	int startIndex = INC(currentIndex);
 	int workingIndex = startIndex;
 	do {
@@ -47,14 +49,24 @@ void VMThreads::rmThread(VMThread *thread) {
 		}
 	}
 }
-bool VMThreads::addThread(VMThread *thread) {
-	for (int i = DEC(currentIndex); i != currentIndex; i = DEC(i)) {
-		logger(LOGLEVEL) << "i:" << i << " currentIndex:" << currentIndex << vmlog::endl;
-		if (threads[i] == 0) {
-			threads[i] = thread;
-			return true;
+size_t VMThreads::addThread(VMThread *thread) {
+	if (maxCount > 0) {
+
+		for (int i = DEC(currentIndex); i != currentIndex; i = DEC(i)) {
+			logger(LOGLEVEL) << "i:" << i << " currentIndex:" << currentIndex
+					<< vmlog::endl;
+			if (threads[i] == 0) {
+				threads[i] = thread;
+				return i + 1;
+			}
 		}
 	}
 	delete thread;
-	return false;
+	return 0;
+}
+
+VMThread *VMThreads::getThread(size_t index) {
+	if (index == 0)
+		return 0;
+	return threads[index - 1];
 }

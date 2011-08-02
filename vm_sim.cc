@@ -53,6 +53,21 @@ void simput(VMThread *thread, VMArg *arg, VMMemoryData data, VMType t) {
 	}
 }
 
+VMQueueType queueType(VMOps op) {
+	switch (op) {
+	case POPP:
+	case PUSHP:
+		return QUEUE_TYPE_PIPE;
+	case POPS:
+	case PUSHS:
+		return QUEUE_TYPE_STACK;
+	case POPQ:
+	case PUSHQ:
+		return QUEUE_TYPE_QUEUE;
+	}
+	throw int();
+}
+
 void runOp(VMThread *thread) {
 	if (!thread) {
 		std::cerr << "thread is null!" << std::endl;
@@ -72,95 +87,135 @@ void runOp(VMThread *thread) {
 
 	// always from-> to
 	// e.g. MOV a,b - take from a and write on b
-
-	switch (i->getOp()) {
-	case DAT:
-		std::cout << "DIIIIIEEEEE" << std::endl;
-		thread->die();
-		return; // back out - because thread is dead anyway
-	case MOVE:
-		simput(thread, arg1, simget(thread, arg0, type), type);
-		break;
-	case ADD:
-	case SUB:
-	case MUL:
-	case DIV:
-	case MOD: {
-		VMMemoryData data = simget(thread, arg1, type);
+	try {
 		switch (i->getOp()) {
+		case DAT:
+			std::cout << "DIIIIIEEEEE" << std::endl;
+			thread->die();
+			return; // back out - because thread is dead anyway
+		case MOVE:
+			simput(thread, arg1, simget(thread, arg0, type), type);
+			break;
 		case ADD:
-			data.add(simget(thread, arg0, type));
-			break;
 		case SUB:
-			data.sub(simget(thread, arg0, type));
-			break;
 		case MUL:
-			data.mul(simget(thread, arg0, type));
-			break;
 		case DIV:
-			data.div(simget(thread, arg0, type));
-			break;
-		case MOD:
-			data.mod(simget(thread, arg0, type));
-			break;
+		case MOD: {
+			VMMemoryData data = simget(thread, arg1, type);
+			switch (i->getOp()) {
+			case ADD:
+				data.add(simget(thread, arg0, type));
+				break;
+			case SUB:
+				data.sub(simget(thread, arg0, type));
+				break;
+			case MUL:
+				data.mul(simget(thread, arg0, type));
+				break;
+			case DIV:
+				data.div(simget(thread, arg0, type));
+				break;
+			case MOD:
+				data.mod(simget(thread, arg0, type));
+				break;
+			}
+			simput(thread, arg1, data, type);
+			thread->setZero(data.isZero());
 		}
-		simput(thread, arg1, data, type);
-		thread->setZero(data.isZero());
-	}
-		break;
-	case JMP:
-		nextIP = simget(thread, arg0, type).asSizeT();
-		break;
-	case JMZ:
-		if (thread->getZeroFlag())
+			break;
+		case JMP:
 			nextIP = simget(thread, arg0, type).asSizeT();
-		break;
-	case JMN:
-		if (!thread->getZeroFlag())
-			nextIP = simget(thread, arg0, type).asSizeT();
-		break;
-	case SPL:
-		thread->fork(simget(thread, arg0, type).asSizeT());
-		break;
-	case SLT:
-		thread->setZero(
-				simget(thread, arg0, type).lessThan(
-						simget(thread, arg1, type)));
-		break;
-	case CMP: {
-		VMMemoryData value0 = simget(thread, arg0, type);
-		VMMemoryData value1 = simget(thread, arg1, type);
-		logger(LOGLEVEL) << "value0:" << value0.value() << " value1:"
-				<< value1.value() << vmlog::endl;
-		thread->setZero((value0.equals(value1)));
+			break;
+		case JMZ:
+			if (thread->getZeroFlag())
+				nextIP = simget(thread, arg0, type).asSizeT();
+			break;
+		case JMN:
+			if (!thread->getZeroFlag())
+				nextIP = simget(thread, arg0, type).asSizeT();
+			break;
+		case SPL:
+			simput(thread, arg1,
+					thread->fork(simget(thread, arg0, type).asSizeT()), type);
+			break;
+		case SLT:
+			thread->setZero(
+					simget(thread, arg0, type).lessThan(
+							simget(thread, arg1, type)));
+			break;
+		case CMP: {
+			VMMemoryData value0 = simget(thread, arg0, type);
+			VMMemoryData value1 = simget(thread, arg1, type);
+			logger(LOGLEVEL) << "value0:" << value0.value() << " value1:"
+					<< value1.value() << vmlog::endl;
+			thread->setZero((value0.equals(value1)));
+		}
+			break;
+		case NOP:
+			logger(LOGLEVEL) << "NOP at" << thread->getIP() << vmlog::endl;
+			break;
+		case PUSHQ:
+		case PUSHS:
+		case PUSHP: {
+			VMMemoryData addr = simget(thread, arg1, type);
+			VMMemoryData val = simget(thread, arg0, type);
+			logger(LOGLEVEL) << "Push a value to a queue val:" << val.value()
+					<< " to queue " << addr.value() << vmlog::endl;
+			VMPipeEnd *q = thread->getQueues()->getQueue(addr.value(),
+					queueType(i->getOp()));
+			std::cout << "Q:" << typeid(q).name() << std::endl;
+			q->write(val.value());
+		}
+			break;
+		case POPQ:
+		case POPS:
+		case POPP: {
+			VMMemoryData addr = simget(thread, arg0, type);
+			logger(LOGLEVEL) << "pop a value from queue val:" << addr.value()
+					<< vmlog::endl;
+			VMMemoryData val = thread->getQueues()->getQueue(addr.value(),
+					queueType(i->getOp()))->read();
+			simput(thread, arg1, val, type);
+		}
+			break;
+		case JOIN: {
+
+			VMMemoryData addr = simget(thread, arg0, type);
+			logger(LOGLEVEL) << "joining to thread " << addr.value()
+					<< " to thread " << thread->getId() << vmlog::endl;
+
+			if (thread->getVM()->getThreads()->getThread(addr.asSizeT())) {
+				nextIP = thread->getIP(); // stay here
+			}
+
+		}
+			break;
+		case THREADP: {
+			throw int(); // not implemented
+
+			VMMemoryData threadId = simget(thread, arg0, type);
+			VMMemoryData pipeId = simget(thread, arg1, type);
+
+			thread->getQueues()->setPipe(
+					pipeId.asSizeT(),
+					thread->getVM()->getThreadPipe(thread->getId(),
+							threadId.asSizeT()));
+		}
+			break;
+		default:
+			logger(LOGLEVEL) << "UNKNOWN" << vmlog::endl;
+		}
+		logger(LOGLEVEL) << toString(i->getOp()) << "-end" << vmlog::endl;
+		if (nextIP == std::string::npos)
+			nextIP = thread->getIP() + 4;
+		thread->setIP(nextIP);
 	}
-		break;
-	case NOP:
-		logger(LOGLEVEL) << "NOP at" << thread->getIP() << vmlog::endl;
-		break;
-	case PUSH: {
-		VMMemoryData addr = simget(thread, arg1, type);
-		VMMemoryData val = simget(thread, arg0, type);
-		logger(LOGLEVEL) << "Push a value to a queue val:" << val.value()
-				<< " to queue " << addr.value() << vmlog::endl;
-		thread->getQueues()->getQueue(addr.value())->push(val);
+	catch(VMQueueException e) {
+		std::cout << "QueueException:" << typeid(e).name() << std::endl;
+		// TODO: add exception handling
+		thread->die();
+
 	}
-		break;
-	case POP: {
-		VMMemoryData addr = simget(thread, arg0, type);
-		logger(LOGLEVEL) << "pop a value from queue val:" << addr.value()
-				<< vmlog::endl;
-		VMMemoryData val = thread->getQueues()->getQueue(addr.value())->pop();
-		simput(thread, arg1, val, type);
-	}
-		break;
-	default:
-		logger(LOGLEVEL) << "UNKNOWN" << vmlog::endl;
-	}
-	logger(LOGLEVEL) << toString(i->getOp()) << "-end" << vmlog::endl;
-	if (nextIP == std::string::npos)
-		nextIP = thread->getIP() + 4;
-	thread->setIP(nextIP);
 
 }
 

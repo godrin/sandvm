@@ -4,7 +4,7 @@ mov.b 0,R1
 loop:
 cmp.a R0,:eof
 jz.a :end
-push.a *R0,0
+pushp.a *R0,2
 add.a 1,R0
 add.b 1,R1
 jmp.a :loop

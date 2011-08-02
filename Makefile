@@ -172,6 +172,30 @@ vm_asm2.cc.s:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.s
 .PHONY : vm_asm2.cc.s
 
+vm_config.o: vm_config.cc.o
+.PHONY : vm_config.o
+
+# target to build an object file
+vm_config.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_config.cc.o
+.PHONY : vm_config.cc.o
+
+vm_config.i: vm_config.cc.i
+.PHONY : vm_config.i
+
+# target to preprocess a source file
+vm_config.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_config.cc.i
+.PHONY : vm_config.cc.i
+
+vm_config.s: vm_config.cc.s
+.PHONY : vm_config.s
+
+# target to generate assembly for a file
+vm_config.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_config.cc.s
+.PHONY : vm_config.cc.s
+
 vm_encoding.o: vm_encoding.cc.o
 .PHONY : vm_encoding.o
 
@@ -291,6 +315,54 @@ vm_ops.s: vm_ops.cc.s
 vm_ops.cc.s:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_ops.cc.s
 .PHONY : vm_ops.cc.s
+
+vm_pipe.o: vm_pipe.cc.o
+.PHONY : vm_pipe.o
+
+# target to build an object file
+vm_pipe.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipe.cc.o
+.PHONY : vm_pipe.cc.o
+
+vm_pipe.i: vm_pipe.cc.i
+.PHONY : vm_pipe.i
+
+# target to preprocess a source file
+vm_pipe.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipe.cc.i
+.PHONY : vm_pipe.cc.i
+
+vm_pipe.s: vm_pipe.cc.s
+.PHONY : vm_pipe.s
+
+# target to generate assembly for a file
+vm_pipe.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipe.cc.s
+.PHONY : vm_pipe.cc.s
+
+vm_pipeend.o: vm_pipeend.cc.o
+.PHONY : vm_pipeend.o
+
+# target to build an object file
+vm_pipeend.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipeend.cc.o
+.PHONY : vm_pipeend.cc.o
+
+vm_pipeend.i: vm_pipeend.cc.i
+.PHONY : vm_pipeend.i
+
+# target to preprocess a source file
+vm_pipeend.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipeend.cc.i
+.PHONY : vm_pipeend.cc.i
+
+vm_pipeend.s: vm_pipeend.cc.s
+.PHONY : vm_pipeend.s
+
+# target to generate assembly for a file
+vm_pipeend.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_pipeend.cc.s
+.PHONY : vm_pipeend.cc.s
 
 vm_queues.o: vm_queues.cc.o
 .PHONY : vm_queues.o
@@ -572,6 +644,9 @@ help:
 	@echo "... vm_asm2.o"
 	@echo "... vm_asm2.i"
 	@echo "... vm_asm2.s"
+	@echo "... vm_config.o"
+	@echo "... vm_config.i"
+	@echo "... vm_config.s"
 	@echo "... vm_encoding.o"
 	@echo "... vm_encoding.i"
 	@echo "... vm_encoding.s"
@@ -587,6 +662,12 @@ help:
 	@echo "... vm_ops.o"
 	@echo "... vm_ops.i"
 	@echo "... vm_ops.s"
+	@echo "... vm_pipe.o"
+	@echo "... vm_pipe.i"
+	@echo "... vm_pipe.s"
+	@echo "... vm_pipeend.o"
+	@echo "... vm_pipeend.i"
+	@echo "... vm_pipeend.s"
 	@echo "... vm_queues.o"
 	@echo "... vm_queues.i"
 	@echo "... vm_queues.s"

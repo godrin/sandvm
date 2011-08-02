@@ -19,8 +19,14 @@ enum VMOps {
 	CMP, //equal -> zflag=>true
 	NOP,
 	INV, // INVALID
-	PUSH,
-	POP,
+	PUSHQ, // queue
+	POPQ,
+	PUSHS, // stack
+	POPS,
+	PUSHP, // pipe
+	POPP,
+	JOIN,
+	THREADP,
 	//LDP,
 	//STP
 	INVALID_OP

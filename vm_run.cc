@@ -40,12 +40,13 @@ int main(int argc, char *argv[]) {
 	vm.getThreads()->addThread(thread);
 
 	for (int i = 0; i < 8000; i++) {
-		std::cout << "STEP " << i << std::endl;
+		//std::cout << "STEP " << i << std::endl;
 		thread = vm.getThreads()->getNextThread();
 		if (!thread)
 			break;
 		runOp(thread);
 	}
 
+	std::cout<<std::endl;
 	return 0;
 }

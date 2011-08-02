@@ -90,7 +90,6 @@ void runOp(VMThread *thread) {
 	try {
 		switch (i->getOp()) {
 		case DAT:
-			std::cout << "DIIIIIEEEEE" << std::endl;
 			thread->die();
 			return; // back out - because thread is dead anyway
 		case MOVE:
@@ -163,7 +162,7 @@ void runOp(VMThread *thread) {
 					<< " to queue " << addr.value() << vmlog::endl;
 			VMPipeEnd *q = thread->getQueues()->getQueue(addr.value(),
 					queueType(i->getOp()));
-			std::cout << "Q:" << typeid(q).name() << std::endl;
+			//std::cout << "Q:" << typeid(q).name() << std::endl;
 			q->write(val.value());
 		}
 			break;

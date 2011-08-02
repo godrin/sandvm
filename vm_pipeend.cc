@@ -22,7 +22,8 @@ VMPipeEndIO::~VMPipeEndIO() {
 }
 
 void VMPipeEndIO::write(Uint8 b) {
-	std::cout << "IO:" << ((int) b) << std::endl;
+	//std::cout << "IO:" << ((int) b) << std::endl;
+	std::cout<<(char)b;
 }
 Uint8 VMPipeEndIO::read() {
 	throw VMQueueEmpty(QUEUE_TYPE_PIPE, 0);

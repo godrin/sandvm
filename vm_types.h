@@ -2,10 +2,15 @@
 #define VM_TYPES
 
 #include <stddef.h>
+#include <vector>
 
 
 enum VMType {
-	BYTE, WORD, DWORD, ADDRESS, INVALID_TYPE
+	BYTE, WORD, DWORD, ADDRESS,
+	FLOAT,
+	STRING, // limited to 65536-4 bytes
+
+	INVALID_TYPE
 };
 
 class Uint64 {
@@ -69,5 +74,12 @@ public:
 	bool equals(const Uint32C &other);
 	Uint8C get(size_t index);
 };
+
+typedef Uint8 VMMemoryData;
+
+typedef std::vector<Uint8> VMMemoryArray;
+typedef Uint32 VMMemoryAddress;
+typedef Uint32 VMComputingField;
+
 
 #endif

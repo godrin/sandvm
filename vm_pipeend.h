@@ -8,6 +8,11 @@ class VMPipeEnd {
 public:
 	virtual void write(Uint8 b)=0;
 	virtual Uint8 read()=0;
+
+	VMMemoryArray read(VMType t);
+
+	VMMemoryArray read(size_t size);
+	void write(const VMMemoryArray &a);
 };
 
 class VMPipeEndIO: public VMPipeEnd {

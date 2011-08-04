@@ -388,6 +388,30 @@ vm_queues.cc.s:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_queues.cc.s
 .PHONY : vm_queues.cc.s
 
+vm_registers.o: vm_registers.cc.o
+.PHONY : vm_registers.o
+
+# target to build an object file
+vm_registers.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_registers.cc.o
+.PHONY : vm_registers.cc.o
+
+vm_registers.i: vm_registers.cc.i
+.PHONY : vm_registers.i
+
+# target to preprocess a source file
+vm_registers.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_registers.cc.i
+.PHONY : vm_registers.cc.i
+
+vm_registers.s: vm_registers.cc.s
+.PHONY : vm_registers.s
+
+# target to generate assembly for a file
+vm_registers.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_registers.cc.s
+.PHONY : vm_registers.cc.s
+
 vm_regs.o: vm_regs.cc.o
 .PHONY : vm_regs.o
 
@@ -671,6 +695,9 @@ help:
 	@echo "... vm_queues.o"
 	@echo "... vm_queues.i"
 	@echo "... vm_queues.s"
+	@echo "... vm_registers.o"
+	@echo "... vm_registers.i"
+	@echo "... vm_registers.s"
 	@echo "... vm_regs.o"
 	@echo "... vm_regs.i"
 	@echo "... vm_regs.s"

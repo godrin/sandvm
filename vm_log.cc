@@ -32,6 +32,12 @@ LogStream &operator<<(LogStream &o, int i) {
 		std::cout << i;
 	return o;
 }
+LogStream &operator<<(LogStream &o, unsigned int i) {
+	if (o.getLevel() < logLevel)
+		std::cout << i;
+	return o;
+}
+
 LogStream &operator<<(LogStream &o, size_t i) {
 	if (o.getLevel() < logLevel)
 		std::cout << i;

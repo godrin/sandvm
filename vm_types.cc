@@ -145,3 +145,4 @@ Uint8C Uint32C::get(size_t index) {
 	}
 	return x & 0xFF;
 }
+

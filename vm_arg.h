@@ -21,6 +21,7 @@ class VMArg {
 		Uint16 word;
 		Uint32 dword;
 	};
+	std::string data;
 public:
 	bool isRegister();
 	bool isAddress();
@@ -31,18 +32,18 @@ public:
 	Uint8 getUint8();
 	Uint16 getUint16();
 	Uint32 getUint32();
+	const std::string &getString();
 	void set(Uint8 v);
 	void set(Uint16 v);
 	void set(Uint32 v);
+	void set(const std::string &s);
 
-
-	void setValue(VMMemoryData data,VMType t);
+	void setValue(VMMemoryData data, VMType t);
 	void setRegister(bool reg);
 	void setDirect(bool d);
 
 	std::string toString(VMType t);
 };
-
 
 #endif
 

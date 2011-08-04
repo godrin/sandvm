@@ -139,6 +139,9 @@ public:
 			} else if (la == 'd') {
 				get();
 				return std::make_pair(MODIFIER, "d");
+			} else if (la == 's') {
+				get();
+				return std::make_pair(MODIFIER, "s");
 			}
 		} else if (la == '\n') {
 			get();
@@ -269,6 +272,10 @@ private:
 			t = DWORD;
 		} else if (type == "w") {
 			t = WORD;
+		} else if (type == "s") {
+			t = STRING;
+		} else if (type == "f") {
+			t = FLOAT;
 		} else {
 			t = BYTE;
 		}

@@ -30,13 +30,13 @@ VMMemoryData VMArg::getValue(VMType type) {
 void VMArg::setValue(VMMemoryData data, VMType type) {
 	switch (type) {
 	case DWORD:
-		dword = data.asSizeT();
+		dword = data;
 		break;
 	case WORD:
-		word = data.asSizeT();
+		word = data;
 		break;
 	case BYTE:
-		byte = data.asSizeT();
+		byte = data;
 		break;
 	default:
 		throw int();
@@ -58,6 +58,9 @@ Uint16 VMArg::getUint16() {
 Uint32 VMArg::getUint32() {
 	return dword;
 }
+const std::string &VMArg::getString() {
+	return data;
+}
 void VMArg::set(Uint8 v) {
 	byte = v;
 }
@@ -68,6 +71,10 @@ void VMArg::set(Uint32 v) {
 	dword = v;
 }
 
+void VMArg::set(const std::string&s) {
+	data=s;
+}
+
 std::string VMArg::toString(VMType t) {
 	std::ostringstream os;
 
@@ -75,7 +82,7 @@ std::string VMArg::toString(VMType t) {
 		os << "*";
 	if (isRegister())
 		os << "R";
-	os << (int) getValue(t).asSizeT();
+	os << (int) getValue(t);
 
 	return os.str();
 }

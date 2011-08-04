@@ -2,6 +2,7 @@
 #define VM_THREAD_H
 
 #include "vm_instruction.h"
+#include "vm_registers.h"
 
 class VMVm;
 class VMEncoding;

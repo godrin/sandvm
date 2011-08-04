@@ -7,12 +7,12 @@
 
 #define LOGLEVEL 5
 
-VMMemoryData simgetdirect(VMThread *thread, VMArg *arg, VMType type) {
-	VMMemoryData data;
+VMComputingField simgetdirect(VMThread *thread, VMArg *arg, VMType type) {
+	VMComputingField data;
 
 	if (arg->isRegister()) {
-		logger(LOGLEVEL) << " from register in :"
-				<< arg->getValue(type).asSizeT() << vmlog::endl;
+		logger(LOGLEVEL) << " from register in :" << arg->getValue(type)
+				<< vmlog::endl;
 		data = thread->getRegisters()->get(arg->getValue(type));
 	} else
 		data = arg->getValue(type);
@@ -23,14 +23,29 @@ VMMemoryData simgetdirect(VMThread *thread, VMArg *arg, VMType type) {
 // *R10 => get address out of 10th register and look up in memory
 // 10 => get value of out memory-position 10
 // *10 => get address from mem-position 10 and look up in memory
-VMMemoryData simget(VMThread *thread, VMArg *arg, VMType type) {
+VMMemoryArray simget(VMThread *thread, VMArg *arg, VMType type) {
 
-	VMMemoryData data = simgetdirect(thread, arg, type);
+	VMMemoryArray data;
 
 	if (arg->isIndirect()) {
-		logger(LOGLEVEL) << " indirect resolve from:" << data.asSizeT()
-				<< vmlog::endl;
-		data = thread->getMemory()->get(data);
+		VMComputingField addr = simgetdirect(thread, arg, ADDRESS); // direct
+		logger(LOGLEVEL) << " indirect resolve from:" << addr << vmlog::endl;
+		data = thread->getMemory()->getArray(addr, type);
+	} else {
+		data = toArray(simgetdirect(thread, arg, type), type); // direct
+	}
+	return data;
+}
+
+Uint32 simgetVal(VMThread *thread, VMArg *arg, VMType type) {
+	Uint32 data;
+
+	if (arg->isIndirect()) {
+		VMComputingField addr = simgetdirect(thread, arg, ADDRESS); // direct
+		logger(LOGLEVEL) << " indirect resolve from:" << addr << vmlog::endl;
+		data = thread->getMemory()->getValue(addr, type);
+	} else {
+		data = simgetdirect(thread, arg, type);
 	}
 	return data;
 }
@@ -39,15 +54,15 @@ VMMemoryData simget(VMThread *thread, VMArg *arg, VMType type) {
 // *R10 => get address from register 10 and store in memory location
 // 10 => put value into memory position 10
 // *10 => lookup address at memory position 10 and store in looked up memory location
-void simput(VMThread *thread, VMArg *arg, VMMemoryData data, VMType t) {
-	VMMemoryData addr;
+void simput(VMThread *thread, VMArg *arg, VMMemoryArray data, VMType t) {
+	VMMemoryAddress addr;
 	if (arg->isIndirect()) {
 		addr = simgetdirect(thread, arg, t);
 		thread->getMemory()->set(addr, data);
 	} else {
 		addr = arg->getValue(t);
 		if (arg->isRegister()) {
-			thread->getRegisters()->set(addr, data);
+			thread->getRegisters()->set(addr, toValue(data, t, 0));
 		} else if (arg->isAddress())
 			thread->getMemory()->set(addr, data);
 	}
@@ -100,54 +115,56 @@ void runOp(VMThread *thread) {
 		case MUL:
 		case DIV:
 		case MOD: {
-			VMMemoryData data = simget(thread, arg1, type);
+			// FIXME: Support FLOATS
+			size_t data = simgetVal(thread, arg1, type);
 			switch (i->getOp()) {
 			case ADD:
-				data.add(simget(thread, arg0, type));
+				data += simgetVal(thread, arg0, type);
 				break;
 			case SUB:
-				data.sub(simget(thread, arg0, type));
+				data -= simgetVal(thread, arg0, type);
 				break;
 			case MUL:
-				data.mul(simget(thread, arg0, type));
+				data *= simgetVal(thread, arg0, type);
 				break;
 			case DIV:
-				data.div(simget(thread, arg0, type));
+				data /= simgetVal(thread, arg0, type);
 				break;
 			case MOD:
-				data.mod(simget(thread, arg0, type));
+				data %= simgetVal(thread, arg0, type);
 				break;
 			}
-			simput(thread, arg1, data, type);
-			thread->setZero(data.isZero());
+			simput(thread, arg1, toArray(data, type), type);
+			thread->setZero(data == 0);
 		}
 			break;
 		case JMP:
-			nextIP = simget(thread, arg0, type).asSizeT();
+			nextIP = simgetVal(thread, arg0, type);
 			break;
 		case JMZ:
 			if (thread->getZeroFlag())
-				nextIP = simget(thread, arg0, type).asSizeT();
+				nextIP = simgetVal(thread, arg0, type);
 			break;
 		case JMN:
 			if (!thread->getZeroFlag())
-				nextIP = simget(thread, arg0, type).asSizeT();
+				nextIP = simgetVal(thread, arg0, type);
 			break;
 		case SPL:
 			simput(thread, arg1,
-					thread->fork(simget(thread, arg0, type).asSizeT()), type);
+					toArray(thread->fork(simgetVal(thread, arg0, type)), type),
+					type);
 			break;
 		case SLT:
 			thread->setZero(
-					simget(thread, arg0, type).lessThan(
-							simget(thread, arg1, type)));
+					simgetVal(thread, arg0, type)
+							<= (simgetVal(thread, arg1, type)));
 			break;
 		case CMP: {
-			VMMemoryData value0 = simget(thread, arg0, type);
-			VMMemoryData value1 = simget(thread, arg1, type);
-			logger(LOGLEVEL) << "value0:" << value0.value() << " value1:"
-					<< value1.value() << vmlog::endl;
-			thread->setZero((value0.equals(value1)));
+			VMComputingField value0 = simgetVal(thread, arg0, type);
+			VMComputingField value1 = simgetVal(thread, arg1, type);
+			logger(LOGLEVEL) << "value0:" << value0 << " value1:" << value1
+					<< vmlog::endl;
+			thread->setZero(value0 == value1);
 		}
 			break;
 		case NOP:
@@ -156,34 +173,33 @@ void runOp(VMThread *thread) {
 		case PUSHQ:
 		case PUSHS:
 		case PUSHP: {
-			VMMemoryData addr = simget(thread, arg1, type);
-			VMMemoryData val = simget(thread, arg0, type);
-			logger(LOGLEVEL) << "Push a value to a queue val:" << val.value()
-					<< " to queue " << addr.value() << vmlog::endl;
-			VMPipeEnd *q = thread->getQueues()->getQueue(addr.value(),
+			VMMemoryAddress addr = simgetVal(thread, arg1, type);
+			VMMemoryArray val = simget(thread, arg0, type);
+			VMPipeEnd *q = thread->getQueues()->getQueue(addr,
 					queueType(i->getOp()));
-			//std::cout << "Q:" << typeid(q).name() << std::endl;
-			q->write(val.value());
+			q->write(val);
 		}
 			break;
 		case POPQ:
 		case POPS:
 		case POPP: {
-			VMMemoryData addr = simget(thread, arg0, type);
-			logger(LOGLEVEL) << "pop a value from queue val:" << addr.value()
+			VMMemoryAddress addr = simgetVal(thread, arg0, type);
+			logger(LOGLEVEL) << "pop a value from queue val:" << addr
 					<< vmlog::endl;
-			VMMemoryData val = thread->getQueues()->getQueue(addr.value(),
-					queueType(i->getOp()))->read();
+			VMPipeEnd *pipeEnd=thread->getQueues()->getQueue(addr,
+					queueType(i->getOp()));
+
+			VMMemoryArray val = pipeEnd->read(type);
 			simput(thread, arg1, val, type);
 		}
 			break;
 		case JOIN: {
 
-			VMMemoryData addr = simget(thread, arg0, type);
-			logger(LOGLEVEL) << "joining to thread " << addr.value()
+			VMMemoryAddress addr = simgetVal(thread, arg0, type);
+			logger(LOGLEVEL) << "joining to thread " << addr
 					<< " to thread " << thread->getId() << vmlog::endl;
 
-			if (thread->getVM()->getThreads()->getThread(addr.asSizeT())) {
+			if (thread->getVM()->getThreads()->getThread(addr)) {
 				nextIP = thread->getIP(); // stay here
 			}
 
@@ -192,13 +208,13 @@ void runOp(VMThread *thread) {
 		case THREADP: {
 			throw int(); // not implemented
 
-			VMMemoryData threadId = simget(thread, arg0, type);
-			VMMemoryData pipeId = simget(thread, arg1, type);
+			VMMemoryAddress threadId = simgetVal(thread, arg0, type);
+			VMMemoryAddress pipeId = simgetVal(thread, arg1, type);
 
 			thread->getQueues()->setPipe(
-					pipeId.asSizeT(),
+					pipeId,
 					thread->getVM()->getThreadPipe(thread->getId(),
-							threadId.asSizeT()));
+							threadId));
 		}
 			break;
 		default:
@@ -213,9 +229,7 @@ void runOp(VMThread *thread) {
 		std::cout << "QueueException:" << typeid(e).name() << std::endl;
 		// TODO: add exception handling
 		thread->die();
-
 	}
-
 }
 
 void sim() {

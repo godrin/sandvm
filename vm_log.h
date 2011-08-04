@@ -24,6 +24,7 @@ LogStream &logger(int level);
 void setLogLevel(int l);
 
 LogStream &operator<<(LogStream &o, int i);
+LogStream &operator<<(LogStream &o, unsigned int i);
 LogStream &operator<<(LogStream &o, size_t i);
 LogStream &operator<<(LogStream &o, const std::string &i);
 LogStream &operator<<(LogStream &o, const vmlog::tendl&i);

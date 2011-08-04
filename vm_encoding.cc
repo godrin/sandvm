@@ -55,7 +55,7 @@ void setFlags(Uint8 flags, VMInstruction *instruction) {
 size_t encodeArg(VMMemory *memory, size_t pos, VMArg *arg, VMType type) {
 	size_t len = 0;
 	logger(LOGLEVEL) << "encode arg at:" << pos << " value:"
-			<< arg->getValue(type).asSizeT() << vmlog::endl;
+			<< arg->getValue(type) << vmlog::endl;
 	switch (type) {
 	case BYTE: {
 		Uint8 byte = arg->getUint8();
@@ -133,20 +133,20 @@ size_t VMEncoding::encode(VMMemory *memory, size_t start,
 size_t decodeArg(VMArg *arg, VMType type, VMMemory *memory, size_t pos) {
 	size_t len = 0;
 	if (type == DWORD) {
-		Uint32 v = (((Uint32) memory->get(pos + 3).value()) << 24)
-				| (((Uint32) memory->get(pos + 2).value()) << 16)
-				| (((Uint32) memory->get(pos + 1).value()) << 8)
-				| (((Uint32) memory->get(pos).value()));
+		Uint32 v = (((Uint32) memory->get(pos + 3)) << 24)
+				| (((Uint32) memory->get(pos + 2)) << 16)
+				| (((Uint32) memory->get(pos + 1)) << 8)
+				| (((Uint32) memory->get(pos)));
 		arg->set(v);
 		len = 4;
 
 	} else if (type == WORD) {
-		Uint16 v = (((Uint16) memory->get(pos + 1).value()) << 8)
-				| (((Uint16) memory->get(pos).value()));
+		Uint16 v = (((Uint16) memory->get(pos + 1)) << 8)
+				| (((Uint16) memory->get(pos)));
 		arg->set(v);
 		len = 2;
 	} else if (type == BYTE) {
-		Uint8 v = ((Uint8) memory->get(pos).value());
+		Uint8 v = ((Uint8) memory->get(pos));
 		arg->set(v);
 		len = 1;
 	}
@@ -158,13 +158,13 @@ size_t VMEncoding::decode(VMMemory *memory, size_t start,
 	size_t pos = start;
 	size_t len = 0;
 
-	Uint8 v = memory->get(pos).value();
+	Uint8 v = memory->get(pos);
 	if (v >= INVALID_OP)
 		throw VMEncodingException(start);
 	instruction->setOp((VMOps) v);
 
 	pos++, len++;
-	Uint8 flags = memory->get(pos).value();
+	Uint8 flags = memory->get(pos);
 	setFlags(flags, instruction);
 	pos++, len++;
 	size_t arity = opSize(instruction->getOp());

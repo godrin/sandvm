@@ -20,7 +20,7 @@ VMThread::~VMThread() {
 	if (vm)
 		vm->threadDeleted(id);
 	logger(LOGLEVEL) << " ~VMThread" << vmlog::endl;
-	logger(LOGLEVEL) << "registers[0]=" << registers->get(0).value()
+	logger(LOGLEVEL) << "registers[0]=" << registers->get(0)
 			<< vmlog::endl;
 	delete registers;
 	delete queues;

@@ -148,29 +148,29 @@ vm_arg.cc.s:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_arg.cc.s
 .PHONY : vm_arg.cc.s
 
-vm_asm2.o: vm_asm2.cc.o
-.PHONY : vm_asm2.o
+vm_asm.o: vm_asm.cc.o
+.PHONY : vm_asm.o
 
 # target to build an object file
-vm_asm2.cc.o:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.o
-.PHONY : vm_asm2.cc.o
+vm_asm.cc.o:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm.cc.o
+.PHONY : vm_asm.cc.o
 
-vm_asm2.i: vm_asm2.cc.i
-.PHONY : vm_asm2.i
+vm_asm.i: vm_asm.cc.i
+.PHONY : vm_asm.i
 
 # target to preprocess a source file
-vm_asm2.cc.i:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.i
-.PHONY : vm_asm2.cc.i
+vm_asm.cc.i:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm.cc.i
+.PHONY : vm_asm.cc.i
 
-vm_asm2.s: vm_asm2.cc.s
-.PHONY : vm_asm2.s
+vm_asm.s: vm_asm.cc.s
+.PHONY : vm_asm.s
 
 # target to generate assembly for a file
-vm_asm2.cc.s:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm2.cc.s
-.PHONY : vm_asm2.cc.s
+vm_asm.cc.s:
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_asm.cc.s
+.PHONY : vm_asm.cc.s
 
 vm_config.o: vm_config.cc.o
 .PHONY : vm_config.o
@@ -412,30 +412,6 @@ vm_registers.cc.s:
 	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_registers.cc.s
 .PHONY : vm_registers.cc.s
 
-vm_regs.o: vm_regs.cc.o
-.PHONY : vm_regs.o
-
-# target to build an object file
-vm_regs.cc.o:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.o
-.PHONY : vm_regs.cc.o
-
-vm_regs.i: vm_regs.cc.i
-.PHONY : vm_regs.i
-
-# target to preprocess a source file
-vm_regs.cc.i:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.i
-.PHONY : vm_regs.cc.i
-
-vm_regs.s: vm_regs.cc.s
-.PHONY : vm_regs.s
-
-# target to generate assembly for a file
-vm_regs.cc.s:
-	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/vm_regs.cc.s
-.PHONY : vm_regs.cc.s
-
 vm_run.o: vm_run.cc.o
 .PHONY : vm_run.o
 
@@ -665,9 +641,9 @@ help:
 	@echo "... vm_arg.o"
 	@echo "... vm_arg.i"
 	@echo "... vm_arg.s"
-	@echo "... vm_asm2.o"
-	@echo "... vm_asm2.i"
-	@echo "... vm_asm2.s"
+	@echo "... vm_asm.o"
+	@echo "... vm_asm.i"
+	@echo "... vm_asm.s"
 	@echo "... vm_config.o"
 	@echo "... vm_config.i"
 	@echo "... vm_config.s"
@@ -698,9 +674,6 @@ help:
 	@echo "... vm_registers.o"
 	@echo "... vm_registers.i"
 	@echo "... vm_registers.s"
-	@echo "... vm_regs.o"
-	@echo "... vm_regs.i"
-	@echo "... vm_regs.s"
 	@echo "... vm_run.o"
 	@echo "... vm_run.i"
 	@echo "... vm_run.s"

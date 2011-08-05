@@ -14,17 +14,29 @@ VMThread::VMThread() {
 	encoder = 0;
 	logger(LOGLEVEL) << " nu thread" << vmlog::endl;
 	id = 0;
+	assertions = 0;
 }
 
 VMThread::~VMThread() {
 	if (vm)
 		vm->threadDeleted(id);
 	logger(LOGLEVEL) << " ~VMThread" << vmlog::endl;
-	logger(LOGLEVEL) << "registers[0]=" << registers->get(0)
-			<< vmlog::endl;
+	logger(LOGLEVEL) << "registers[0]=" << registers->get(0) << vmlog::endl;
 	delete registers;
 	delete queues;
 	logger(LOGLEVEL) << " ~VMThread" << vmlog::endl;
+	if (assertions > 0) {
+		std::cout << "Assertions ok in thread " << id << " :" << assertions
+				<< std::endl;
+	}
+}
+
+void VMThread::incAssertionCount() {
+	assertions++;
+}
+
+size_t VMThread::getAssertionCount() const {
+	return assertions;
 }
 
 void VMThread::setMemory(VMMemory *m) {
@@ -115,8 +127,8 @@ size_t VMThread::getId() {
 void VMThread::checkQueues() {
 	if (queues && vm) {
 		if (!queues->getQueueUnchecked(0, QUEUE_TYPE_PIPE)) {
-			queues->setPipe(VMQueues::IO,vm->getIOPipe());
-			queues->setPipe(VMQueues::API,vm->getAPIPipe());
+			queues->setPipe(VMQueues::IO, vm->getIOPipe());
+			queues->setPipe(VMQueues::API, vm->getAPIPipe());
 		}
 	}
 }

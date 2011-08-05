@@ -1,3 +1,4 @@
-push.b 'a',1
-pop.b 1,R0
-push.b R0,0
+pushq.b 'a',1
+popq.b 1,R0
+assert.b 'a',R0
+pushp.b R0,0

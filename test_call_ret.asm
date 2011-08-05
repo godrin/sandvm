@@ -13,8 +13,11 @@ stop
 
 func:
 pops.b :CALL_STACK,R1
+assert.b R1,33
 pops.b :CALL_STACK,R2
+assert.b R2,77
 pops.a :CALL_STACK,R0
+assert.a R0,:ret_addr
 add.b R1,R2
 pushp.b 'A',0
 pushs.b R2,:CALL_STACK

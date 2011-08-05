@@ -18,13 +18,14 @@ bool VMArg::isDirect() {
 VMMemoryData VMArg::getValue(VMType type) {
 	switch (type) {
 	case DWORD:
+	case ADDRESS:
 		return dword;
 	case WORD:
 		return word;
 	case BYTE:
 		return byte;
 	}
-	throw int();
+	throw VMExceptionWrongType(type);
 }
 
 void VMArg::setValue(VMMemoryData data, VMType type) {
@@ -72,7 +73,7 @@ void VMArg::set(Uint32 v) {
 }
 
 void VMArg::set(const std::string&s) {
-	data=s;
+	data = s;
 }
 
 std::string VMArg::toString(VMType t) {

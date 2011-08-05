@@ -66,6 +66,7 @@ VMMemoryArray VMMemory::getArray(size_t p, VMType t) {
 	}
 	std::copy(cells.begin() + p, cells.begin() + p + size,
 			std::back_inserter(r));
+	return r;
 }
 
 Uint32 VMMemory::getValue(size_t p, VMType t) {

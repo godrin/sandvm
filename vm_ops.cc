@@ -47,6 +47,10 @@ std::string toString(VMOps op) {
 		return "JOIN";
 	case THREADP:
 		return "THREADP";
+	case ASSERT:
+		return "ASSERT";
+	case DEBUGOUT:
+		return "DEBUGOUT";
 	}
 	return "UNKNOWN";
 }
@@ -97,6 +101,10 @@ VMOps getOp(const std::string &x) {
 		return JOIN;
 	if (s == "THREADP")
 		return THREADP;
+	if (s == "ASSERT")
+		return ASSERT;
+	if (s == "DEBGOUT")
+		return DEBUGOUT;
 	return INV;
 }
 
@@ -129,8 +137,11 @@ size_t opSize(VMOps op) {
 	case PUSHP:
 	case POPP:
 	case THREADP:
+	case ASSERT:
 		return 2;
 		return 2;
+	case DEBUGOUT:
+		return 1;
 
 	}
 	return 0;

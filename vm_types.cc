@@ -146,3 +146,24 @@ Uint8C Uint32C::get(size_t index) {
 	return x & 0xFF;
 }
 
+std::string toString(VMType t) {
+	switch (t) {
+	case BYTE:
+		return "BYTE";
+	case WORD:
+		return "WORD";
+	case DWORD:
+		return "DWORD";
+	case ADDRESS:
+		return "ADDRESS";
+	case FLOAT:
+		return "FLOAT";
+	case STRING:
+		return "STRING";
+
+	case INVALID_TYPE:
+		return "INVALID_TYPE";
+	default:
+		throw int();
+	}
+}

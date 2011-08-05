@@ -196,6 +196,8 @@ public:
 			std::string n;
 			while (lookaheadchar() != la) {
 				n += get();
+				if(eof())
+					throw new EofException();
 			}
 			get();
 			return std::make_pair(ENCLOSED_STRING, n);
@@ -350,6 +352,7 @@ public:
 		l.op = INV;
 		l.define = false;
 		l.lineNumber = lineNumber;
+		l.last = false;
 
 		if (current.first == Lexer::LABEL) {
 			l.label = current.second;
@@ -464,7 +467,6 @@ void parse(std::istream &stream, VMMemory *memory, size_t start,
 	VMInstruction instruction;
 
 	while (!(l = p.getLine()).last) {
-
 		if (l.define) {
 			refs.insert(std::make_pair(l.label, l.value));
 			if (l.label == "_queueCount") {

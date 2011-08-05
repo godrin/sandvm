@@ -21,6 +21,7 @@ class VMThread {
 
 	size_t id;
 	size_t parentId;
+	size_t assertions;
 
 public:
 	VMThread();
@@ -46,6 +47,9 @@ public:
 	size_t fork(size_t pip);
 
 	void die();
+
+	void incAssertionCount();
+	size_t getAssertionCount() const;
 
 	void setZero(bool f);
 	bool getZeroFlag() const;

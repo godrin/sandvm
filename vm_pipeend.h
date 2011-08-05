@@ -12,7 +12,7 @@ public:
 	VMMemoryArray read(VMType t);
 
 	VMMemoryArray read(size_t size);
-	void write(const VMMemoryArray &a);
+	virtual void write(const VMMemoryArray &a);
 };
 
 class VMPipeEndIO: public VMPipeEnd {

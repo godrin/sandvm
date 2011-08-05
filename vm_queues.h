@@ -42,6 +42,9 @@ public:
 	VMQueue *clone(size_t pid);
 
 	VMQueueType getQueueType();
+
+	virtual void write(const VMMemoryArray &a);
+
 };
 
 class VMQueues {

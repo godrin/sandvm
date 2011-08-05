@@ -186,18 +186,39 @@ void runOp(VMThread *thread) {
 			VMMemoryAddress addr = simgetVal(thread, arg0, type);
 			logger(LOGLEVEL) << "pop a value from queue val:" << addr
 					<< vmlog::endl;
-			VMPipeEnd *pipeEnd=thread->getQueues()->getQueue(addr,
+			VMPipeEnd *pipeEnd = thread->getQueues()->getQueue(addr,
 					queueType(i->getOp()));
 
 			VMMemoryArray val = pipeEnd->read(type);
 			simput(thread, arg1, val, type);
 		}
 			break;
+		case DEBUGOUT: {
+			VMComputingField f = simgetVal(thread, arg0, type);
+			logger(0) << "DEBUGOUT " << (int) f << " as cahr:" << (char) f
+					<< vmlog::endl;
+		}
+			break;
+		case ASSERT: {
+			VMComputingField a = simgetVal(thread, arg0, type);
+			VMComputingField b = simgetVal(thread, arg1, type);
+			if (a != b) {
+				logger(0) << " Assert failed in thread " << thread->getId()
+						<< " because " << a << "!=" << b << vmlog::endl;
+				thread->die();
+			} else {
+				logger(0) << " Assert ok in thread " << thread->getId()
+						<< " : " << a << "==" << b << vmlog::endl;
+				thread->incAssertionCount();
+			}
+
+		}
+			break;
 		case JOIN: {
 
 			VMMemoryAddress addr = simgetVal(thread, arg0, type);
-			logger(LOGLEVEL) << "joining to thread " << addr
-					<< " to thread " << thread->getId() << vmlog::endl;
+			logger(LOGLEVEL) << "joining to thread " << addr << " to thread "
+					<< thread->getId() << vmlog::endl;
 
 			if (thread->getVM()->getThreads()->getThread(addr)) {
 				nextIP = thread->getIP(); // stay here
@@ -211,10 +232,8 @@ void runOp(VMThread *thread) {
 			VMMemoryAddress threadId = simgetVal(thread, arg0, type);
 			VMMemoryAddress pipeId = simgetVal(thread, arg1, type);
 
-			thread->getQueues()->setPipe(
-					pipeId,
-					thread->getVM()->getThreadPipe(thread->getId(),
-							threadId));
+			thread->getQueues()->setPipe(pipeId,
+					thread->getVM()->getThreadPipe(thread->getId(), threadId));
 		}
 			break;
 		default:

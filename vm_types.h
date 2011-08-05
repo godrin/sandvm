@@ -3,15 +3,15 @@
 
 #include <stddef.h>
 #include <vector>
-
+#include <string>
 
 enum VMType {
-	BYTE, WORD, DWORD, ADDRESS,
-	FLOAT,
-	STRING, // limited to 65536-4 bytes
+	BYTE, WORD, DWORD, ADDRESS, FLOAT, STRING, // limited to 65536-4 bytes
 
 	INVALID_TYPE
 };
+
+std::string toString(VMType t);
 
 class Uint64 {
 	unsigned char data[8];
@@ -81,5 +81,17 @@ typedef std::vector<Uint8> VMMemoryArray;
 typedef Uint32 VMMemoryAddress;
 typedef Uint32 VMComputingField;
 
+class VMExceptionWrongType {
+	VMType type;
+public:
+	VMExceptionWrongType(VMType t) :
+			type(t) {
+	}
+	std::string what() {
+		std::string x = "WrongType Used ";
+		return x + toString(type);
+	}
+}
+;
 
 #endif

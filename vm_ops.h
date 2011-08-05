@@ -27,6 +27,8 @@ enum VMOps {
 	POPP,
 	JOIN,
 	THREADP,
+	ASSERT,
+	DEBUGOUT,
 	//LDP,
 	//STP
 	INVALID_OP

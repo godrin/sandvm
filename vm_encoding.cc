@@ -101,6 +101,9 @@ size_t VMEncoding::encode(VMMemory *memory, size_t start,
 	size_t pos = start;
 	size_t len = 0;
 
+	logger(LOGLEVEL) << "encoding:" << toString(instruction->getOp())
+			<< vmlog::endl;
+
 	VMOps op = instruction->getOp();
 	if (memory)
 		memory->set(pos++, op);

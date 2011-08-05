@@ -43,6 +43,18 @@ void VMQueue::write(Uint8 c) {
 		}
 	}
 }
+
+void VMQueue::write(const VMMemoryArray &a) {
+	if(mode==QUEUE_MODE_STACK) {
+		for (VMMemoryArray::const_reverse_iterator i = a.rbegin(); i != a.rend(); i++) {
+			write(*i);
+		}
+	}
+	else
+		VMPipeEnd::write(a);
+}
+
+
 Uint8 VMQueue::read() {
 	if (mode == QUEUE_MODE_OUT) {
 		throw VMQueueWrongUse(getQueueType(), id);

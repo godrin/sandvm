@@ -1,9 +1,11 @@
 #include "vm_vm.h"
 #include "vm_pipe.h"
 #include "vm_pipeend.h"
+#include "api/vm_api.h"
 
 VMVm::VMVm() :
 		memory(0), threads(0) {
+	api = new VMApi(this);
 }
 VMMemory *VMVm::getMemory() {
 	return memory;
@@ -54,4 +56,8 @@ VMPipeEnd *VMVm::getThreadPipe(size_t from, size_t to) {
 
 void VMVm::threadDeleted(size_t id) {
 	std::cout << "Thread deleted:" << id << std::endl;
+}
+
+VMApi *VMVm::getApi() {
+	return api;
 }

@@ -5,6 +5,7 @@
 #include "vm_encoding.h"
 #include "vm_queues.h"
 #include "vm_log.h"
+#include "vm_api_file.h"
 
 int main(int argc, char *argv[]) {
 	VMMemory *m = new VMMemory(2000, "Memory");
@@ -38,6 +39,11 @@ int main(int argc, char *argv[]) {
 	thread->setVM(&vm);
 	thread->setQueues(new VMQueues(vm.getConfig()));
 	vm.getThreads()->addThread(thread);
+
+	// bootstrap
+	VMApiModule *mod=new VMFileAccess();
+	mod->init(vm.getApi());
+
 
 	for (int i = 0; i < 8000; i++) {
 		//std::cout << "STEP " << i << std::endl;

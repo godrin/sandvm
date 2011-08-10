@@ -10,12 +10,14 @@
 
 class VMPipe;
 class VMPipeEnd;
+class VMApi;
 
 class VMVm {
 	VMMemory *memory;
 	VMThreads *threads;
 
 	VMConfig config;
+	VMApi *api;
 
 	// pipes between threads
 	std::map<std::pair<size_t, size_t>,VMPipe*> threadPipes;
@@ -35,6 +37,8 @@ public:
 	VMPipeEnd *getAPIPipe();
 
 	void threadDeleted(size_t id);
+
+	VMApi *getApi();
 };
 
 #endif

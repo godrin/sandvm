@@ -99,6 +99,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named vm_api_test
+
+# Build rule for target.
+vm_api_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 vm_api_test
+.PHONY : vm_api_test
+
+# fast build rule for target.
+vm_api_test/fast:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/build
+.PHONY : vm_api_test/fast
+
+#=============================================================================
 # Target rules for targets named vm_run
 
 # Build rule for target.
@@ -123,6 +136,84 @@ vm_type_sizes: cmake_check_build_system
 vm_type_sizes/fast:
 	$(MAKE) -f CMakeFiles/vm_type_sizes.dir/build.make CMakeFiles/vm_type_sizes.dir/build
 .PHONY : vm_type_sizes/fast
+
+api/vm_api.o: api/vm_api.cc.o
+.PHONY : api/vm_api.o
+
+# target to build an object file
+api/vm_api.cc.o:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api.cc.o
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api.cc.o
+.PHONY : api/vm_api.cc.o
+
+api/vm_api.i: api/vm_api.cc.i
+.PHONY : api/vm_api.i
+
+# target to preprocess a source file
+api/vm_api.cc.i:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api.cc.i
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api.cc.i
+.PHONY : api/vm_api.cc.i
+
+api/vm_api.s: api/vm_api.cc.s
+.PHONY : api/vm_api.s
+
+# target to generate assembly for a file
+api/vm_api.cc.s:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api.cc.s
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api.cc.s
+.PHONY : api/vm_api.cc.s
+
+api/vm_api_file.o: api/vm_api_file.cc.o
+.PHONY : api/vm_api_file.o
+
+# target to build an object file
+api/vm_api_file.cc.o:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_file.cc.o
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api_file.cc.o
+.PHONY : api/vm_api_file.cc.o
+
+api/vm_api_file.i: api/vm_api_file.cc.i
+.PHONY : api/vm_api_file.i
+
+# target to preprocess a source file
+api/vm_api_file.cc.i:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_file.cc.i
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api_file.cc.i
+.PHONY : api/vm_api_file.cc.i
+
+api/vm_api_file.s: api/vm_api_file.cc.s
+.PHONY : api/vm_api_file.s
+
+# target to generate assembly for a file
+api/vm_api_file.cc.s:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_file.cc.s
+	$(MAKE) -f CMakeFiles/vm_run.dir/build.make CMakeFiles/vm_run.dir/api/vm_api_file.cc.s
+.PHONY : api/vm_api_file.cc.s
+
+api/vm_api_test.o: api/vm_api_test.cc.o
+.PHONY : api/vm_api_test.o
+
+# target to build an object file
+api/vm_api_test.cc.o:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_test.cc.o
+.PHONY : api/vm_api_test.cc.o
+
+api/vm_api_test.i: api/vm_api_test.cc.i
+.PHONY : api/vm_api_test.i
+
+# target to preprocess a source file
+api/vm_api_test.cc.i:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_test.cc.i
+.PHONY : api/vm_api_test.cc.i
+
+api/vm_api_test.s: api/vm_api_test.cc.s
+.PHONY : api/vm_api_test.s
+
+# target to generate assembly for a file
+api/vm_api_test.cc.s:
+	$(MAKE) -f CMakeFiles/vm_api_test.dir/build.make CMakeFiles/vm_api_test.dir/api/vm_api_test.cc.s
+.PHONY : api/vm_api_test.cc.s
 
 vm_arg.o: vm_arg.cc.o
 .PHONY : vm_arg.o
@@ -636,8 +727,18 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... vm_api_test"
 	@echo "... vm_run"
 	@echo "... vm_type_sizes"
+	@echo "... api/vm_api.o"
+	@echo "... api/vm_api.i"
+	@echo "... api/vm_api.s"
+	@echo "... api/vm_api_file.o"
+	@echo "... api/vm_api_file.i"
+	@echo "... api/vm_api_file.s"
+	@echo "... api/vm_api_test.o"
+	@echo "... api/vm_api_test.i"
+	@echo "... api/vm_api_test.s"
 	@echo "... vm_arg.o"
 	@echo "... vm_arg.i"
 	@echo "... vm_arg.s"

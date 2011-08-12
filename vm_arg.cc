@@ -19,6 +19,7 @@ VMMemoryData VMArg::getValue(VMType type) {
 	switch (type) {
 	case DWORD:
 	case ADDRESS:
+	case STRING:
 		return dword;
 	case WORD:
 		return word;

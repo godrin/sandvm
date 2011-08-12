@@ -58,6 +58,12 @@ std::string VMInstruction::toString() {
 	case DWORD:
 		s += "d";
 		break;
+	case STRING:
+		s += "s";
+		break;
+	case ADDRESS:
+		s += "a";
+		break;
 	}
 
 	s += " ";

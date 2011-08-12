@@ -10,7 +10,7 @@
 int main(int argc, char *argv[]) {
 	VMMemory *m = new VMMemory(2000, "Memory");
 
-	setLogLevel(0);
+	setLogLevel(7);
 
 	std::string filename;
 	if (argc > 1)

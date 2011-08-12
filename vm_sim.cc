@@ -177,6 +177,7 @@ void runOp(VMThread *thread) {
 			VMMemoryArray val = simget(thread, arg0, type);
 			VMPipeEnd *q = thread->getQueues()->getQueue(addr,
 					queueType(i->getOp()));
+			std::cout<<"QUEUE:"<<typeid(*q).name()<<std::endl;
 			q->write(val);
 		}
 			break;

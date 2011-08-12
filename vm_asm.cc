@@ -114,6 +114,16 @@ public:
 		return true;
 	}
 
+	std::string rest() {
+		std::string x;
+
+		while (!eof()) {
+			char c = readChar();
+			x += std::string(&c, 1);
+		}
+		return x;
+	}
+
 	std::pair<Item, std::string> next() {
 		if (eof())
 			return std::make_pair(MEOF, "");
@@ -196,7 +206,7 @@ public:
 			std::string n;
 			while (lookaheadchar() != la) {
 				n += get();
-				if(eof())
+				if (eof())
 					throw new EofException();
 			}
 			get();
@@ -235,6 +245,7 @@ public:
 
 	bool define;
 	size_t value;
+	bool stringsize;
 
 	void toInstruction(VMInstruction *i) {
 		VMType t = getType();
@@ -261,6 +272,10 @@ private:
 			break;
 		case DWORD:
 		case ADDRESS:
+			vmarg->set((Uint32) arg->value);
+			break;
+		case STRING:
+			// should be address
 			vmarg->set((Uint32) arg->value);
 			break;
 		default:
@@ -398,10 +413,14 @@ public:
 				throw int();
 			}
 		} else if (current.first == Lexer::WORD) {
-			if (toUpper(current.second) == "EQU") {
+			if (toUpper(current.second) == "EQU"
+					|| toUpper(current.second) == "STRING") {
+				std::cout << "foud string" << std::endl;
+				l.stringsize = (toUpper(current.second) == "STRING");
 				next();
 				if (current.first == Lexer::ENCLOSED_STRING) {
 					l.data = current.second;
+					std::cout << "l.ss:" << l.stringsize << std::endl;
 					next();
 				} else {
 					logger(LOGLEVEL) << "Error at:" << current.first << ":"
@@ -435,6 +454,7 @@ public:
 		} else {
 			logger(LOGLEVEL) << "Error at:" << current.first << ":"
 					<< current.second << " line:" << lineNumber << vmlog::endl;
+			logger(LOGLEVEL) << "rest:" << rest() << vmlog::endl;
 			throw int();
 		}
 
@@ -450,6 +470,10 @@ private:
 		} while (current.first == Lexer::WHITESPACE
 				|| current.first == Lexer::COMMENT);
 
+	}
+
+	std::string rest() {
+		return lexer->rest();
 	}
 };
 
@@ -491,6 +515,8 @@ void parse(std::istream &stream, VMMemory *memory, size_t start,
 			}
 			if (l.data.length() > 0) {
 				pos += l.data.length();
+				if (l.stringsize)
+					pos += 4;
 			} else {
 				l.toInstruction(&instruction);
 				pos += encoder->encode(0, 0, &instruction);
@@ -512,6 +538,12 @@ void parse(std::istream &stream, VMMemory *memory, size_t start,
 	for (std::vector<Line>::iterator i = lines.begin(); i != lines.end(); i++) {
 		l = *i;
 		if (l.data.length() > 0) {
+			if (l.stringsize) {
+				VMMemoryArray data = toArray(l.data);
+				std::cout << "DATA:" << data.size() << std::endl;
+				memory->set(cur, data);
+				cur += data.size();
+			}
 			for (size_t x = 0; x < l.data.length(); x++) {
 				memory->set(cur++, l.data[x]);
 			}

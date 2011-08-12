@@ -70,6 +70,7 @@ VMPipeEndAPI::~VMPipeEndAPI() {
 }
 
 void VMPipeEndAPI::write(Uint8 b) {
+	std::cout <<"API"<< (char) b<<std::endl;
 
 }
 Uint8 VMPipeEndAPI::read() {

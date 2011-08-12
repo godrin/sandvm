@@ -32,18 +32,27 @@ VMMemory *VMMemory::clone() {
 }
 
 void VMMemory::set(VMMemoryAddress addr, VMMemoryArray data) {
+	if (addr >= cells.size() || addr + data.size() >= cells.size()) {
+		std::cout << "VMMemory::set - addr:" << addr << " data.size:"
+				<< data.size() << " cells.size:" << cells.size() << std::endl;
+		throw int();
+	}
 	std::copy(data.begin(), data.end(),
-			std::inserter(data, cells.begin() + addr));
+			std::inserter(cells, cells.begin() + addr));
 }
 
 VMMemoryArray VMMemory::getArray(size_t p, VMType t) {
 
 	VMMemoryArray r;
-	Uint32 size;
+	Uint32 size = 0;
 	if (t == STRING) {
 		size = getUint32(p);
 		size += 4;
-
+		if (size > cells.size() / 2) {
+			std::cout << "size:" << size << " of memory-size:" << cells.size()
+					<< std::endl;
+			throw int();
+		}
 	} else {
 
 		switch (t) {
@@ -64,6 +73,7 @@ VMMemoryArray VMMemory::getArray(size_t p, VMType t) {
 			throw int();
 		}
 	}
+	std::cout << "SIZE:" << size << std::endl;
 	std::copy(cells.begin() + p, cells.begin() + p + size,
 			std::back_inserter(r));
 	return r;
